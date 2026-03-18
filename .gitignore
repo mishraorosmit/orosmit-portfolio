@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.env
+db.sqlite3
+media/
+staticfiles/
+venv/
+env/
+
+# Node
+node_modules/
+dist/
+.env.production
+
+# General
+.DS_Store
+*.log
+.vscode/

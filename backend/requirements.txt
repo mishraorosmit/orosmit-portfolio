@@ -1,0 +1,11 @@
+Django==4.2.*
+djangorestframework
+django-cors-headers
+django-environ
+PyJWT
+requests
+gunicorn
+whitenoise
+dj-database-url
+psycopg2-binary
+Pillow
