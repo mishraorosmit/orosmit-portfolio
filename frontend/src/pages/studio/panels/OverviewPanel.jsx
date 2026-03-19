@@ -3,7 +3,7 @@ import StudioCard from '../components/StudioCard';
 import StudioButton from '../components/StudioButton';
 import api from '@/lib/api';
 
-export default function OverviewPanel() {
+export default function OverviewPanel({ onNavigate }) {
   const [stats, setStats] = useState({ projects: 0, writings: 0, messages: 0, status: '...' });
   const [messages, setMessages] = useState([]);
   const [greeting, setGreeting] = useState('');
@@ -18,6 +18,7 @@ export default function OverviewPanel() {
     else setGreeting('Working late, Orosmit.');
 
     setDateStr(new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+
 
     const fetchData = async () => {
       try {
@@ -51,9 +52,16 @@ export default function OverviewPanel() {
   return (
     <div className="pb-20">
       <div className="mb-12">
-        <h1 className="font-display font-bold text-[28px] text-white tracking-tight mb-2">{greeting}</h1>
+        <h1 style={{
+          fontFamily: 'Syne, sans-serif',
+          fontSize: '28px',
+          fontWeight: '800',
+          color: '#ffffff',
+          marginBottom: '8px',
+        }}>{greeting}</h1>
         <p className="font-mono text-[12px] opacity-40 uppercase tracking-widest">{dateStr}</p>
       </div>
+
 
       <div className="grid grid-cols-4 gap-6 mb-12">
         <StudioCard title="PROJECTS">

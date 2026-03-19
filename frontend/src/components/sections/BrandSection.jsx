@@ -13,7 +13,12 @@ export default function BrandSection() {
   const num3 = useCountUp('∞', 1500, isStripInView);
 
   return (
-    <section id="brand"  className="relative w-full py-24 overflow-hidden flex flex-col justify-center">
+    <section 
+      id="brand" 
+      className="relative w-full py-24 md:py-32 overflow-hidden z-10"
+      style={{ background: 'var(--brand-bg)', color: 'var(--brand-text)' }}
+    >
+      <div className="max-w-7xl mx-auto px-8 relative z-10">
       {/* Black Curtain Wipe & Fade to Void */}
       <motion.div 
         className="absolute inset-0 z-0 pointer-events-none"
@@ -26,7 +31,7 @@ export default function BrandSection() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-8 flex flex-col mt-16 pb-16">
+      <div className="relative z-10 w-full flex flex-col mt-16 pb-16">
         
         {/* TOP HALF */}
         <div className="flex flex-col lg:flex-row gap-16 items-center">
@@ -145,6 +150,7 @@ export default function BrandSection() {
         </motion.div>
 
       </div>
+      </div> {/* This closes the max-w-7xl div */}
     </section>
   );
 }

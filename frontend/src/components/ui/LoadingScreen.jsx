@@ -52,7 +52,8 @@ export default function LoadingScreen() {
               opacity: { duration: 0.3 }
             }
           }}
-          className="fixed inset-0 z-[1000] bg-[#020205] flex flex-col items-center justify-center cursor-none overflow-hidden"
+          className="fixed inset-0 z-[1000] bg-[var(--bg-primary)] flex flex-col items-center justify-center cursor-none overflow-hidden"
+
         >
           {/* Background Layers */}
           <div 
@@ -82,7 +83,8 @@ export default function LoadingScreen() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="absolute bg-white rounded-full z-10"
+              className="absolute bg-[var(--text-primary)] rounded-full z-10"
+
               style={{
                 left: `${p.x}%`,
                 top: `${p.y}%`,
@@ -129,7 +131,8 @@ export default function LoadingScreen() {
                 initial={{ pathLength: 0 }}
                 animate={{ 
                   pathLength: 1,
-                  stroke: isDrawn ? ["#FF4500", "#ffffff", "#FF4500"] : "#FF4500"
+                  stroke: isDrawn ? ["var(--accent)", "var(--text-primary)", "var(--accent)"] : "var(--accent)"
+
                 }}
               />
               <motion.path
@@ -141,7 +144,8 @@ export default function LoadingScreen() {
                 initial={{ pathLength: 0 }}
                 animate={{ 
                   pathLength: 1,
-                  stroke: isDrawn ? ["#C0C0C0", "#ffffff", "#C0C0C0"] : "#C0C0C0"
+                  stroke: isDrawn ? ["var(--text-secondary)", "var(--text-primary)", "var(--text-secondary)"] : "var(--text-secondary)"
+
                 }}
               />
             </svg>
@@ -150,7 +154,7 @@ export default function LoadingScreen() {
           {/* BELOW THE OM */}
           <div className="mt-8 flex flex-col items-center gap-4 z-20">
             {/* Name Reveal */}
-            <div className="flex gap-4 font-['Space_Mono'] text-[11px] tracking-[0.4em] text-chrome/40 uppercase">
+            <div className="flex gap-4 font-['Space_Mono'] text-[11px] tracking-[0.4em] text-[var(--text-muted)] uppercase">
               {nameWords.map((word, wIdx) => (
                 <div key={wIdx} className="flex overflow-hidden">
                   {word.split('').map((char, cIdx) => (
@@ -172,21 +176,22 @@ export default function LoadingScreen() {
             </div>
 
             {/* Loading Bar */}
-            <div className="w-[200px] h-[1px] bg-chrome/10 overflow-hidden relative">
+            <div className="w-[200px] h-[1px] bg-[var(--border-subtle)] overflow-hidden relative">
               <motion.div
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 1.8, ease: "linear" }}
-                className="h-full bg-gradient-to-r from-[#FF4500] to-[#C0C0C0]"
+                className="h-full bg-gradient-to-r from-[var(--accent)] to-[var(--text-secondary)]"
+
               />
             </div>
           </div>
 
           {/* Bottom Corner Text */}
-          <div className="absolute bottom-8 left-8 font-['Space_Mono'] text-[9px] opacity-20 tracking-wider">
+          <div className="absolute bottom-8 left-8 font-['Space_Mono'] text-[9px] text-[var(--text-muted)] tracking-wider opacity-60">
             V1.0
           </div>
-          <div className="absolute bottom-8 right-8 font-['Space_Mono'] text-[9px] opacity-20 tracking-wider">
+          <div className="absolute bottom-8 right-8 font-['Space_Mono'] text-[9px] text-[var(--text-muted)] tracking-wider opacity-60">
             INDIA
           </div>
         </motion.div>
@@ -194,4 +199,3 @@ export default function LoadingScreen() {
     </AnimatePresence>
   );
 }
-

@@ -16,7 +16,8 @@ const InputField = ({ label, id, type = 'text', value, onChange, error, ...props
         background: 'transparent',
         border: 'none',
         borderBottom: '1px solid var(--border)',
-        color: '#ffffff',
+        color: 'var(--text-primary)',
+
         fontFamily: 'Space Mono, monospace',
         fontSize: '14px',
         padding: '14px 0',
@@ -25,11 +26,13 @@ const InputField = ({ label, id, type = 'text', value, onChange, error, ...props
         display: 'block',
         marginBottom: '32px',
       }}
-      onFocus={e => e.target.style.borderBottomColor = '#FF4500'}
+      onFocus={e => e.target.style.borderBottomColor = 'var(--accent)'}
+
       onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
       {...props}
     />
-    {error && <span style={{ position: 'absolute', bottom: '-20px', left: 0, color: '#FF4500', fontSize: '11px', fontFamily: 'Space Mono' }}>{error}</span>}
+    {error && <span style={{ position: 'absolute', bottom: '-20px', left: 0, color: 'var(--accent)', fontSize: '11px', fontFamily: 'Space Mono' }}>{error}</span>}
+
   </div>
 );
 
@@ -45,7 +48,8 @@ const TextareaField = ({ label, id, value, onChange, error, ...props }) => (
         background: 'transparent',
         border: 'none',
         borderBottom: '1px solid var(--border)',
-        color: '#ffffff',
+        color: 'var(--text-primary)',
+
         fontFamily: 'Space Mono, monospace',
         fontSize: '14px',
         padding: '14px 0',
@@ -54,11 +58,13 @@ const TextareaField = ({ label, id, value, onChange, error, ...props }) => (
         display: 'block',
         marginBottom: '32px',
       }}
-      onFocus={e => e.target.style.borderBottomColor = '#FF4500'}
+      onFocus={e => e.target.style.borderBottomColor = 'var(--accent)'}
+
       onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
       {...props}
     />
-    {error && <span style={{ position: 'absolute', bottom: '-20px', left: 0, color: '#FF4500', fontSize: '11px', fontFamily: 'Space Mono' }}>{error}</span>}
+    {error && <span style={{ position: 'absolute', bottom: '-20px', left: 0, color: 'var(--accent)', fontSize: '11px', fontFamily: 'Space Mono' }}>{error}</span>}
+
   </div>
 );
 
@@ -108,14 +114,14 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-chrome mb-4 leading-[1.0] tracking-tighter mix-blend-difference">
+            <h2 className="text-5xl md:text-7xl font-display font-bold text-[var(--text-primary)] leading-[0.9] tracking-tighter uppercase mb-6">
               {t.contact.heading}
             </h2>
-            <p className="text-xl font-mono text-starDust mb-12">
+            <p className="font-mono text-[var(--text-secondary)] text-sm md:text-base max-w-md leading-relaxed">
               {t.contact.subheading}
             </p>
 
-            <ul className="flex flex-col gap-6 font-mono text-chrome tracking-wide mb-16">
+            <ul className="flex flex-col gap-6 font-mono text-[var(--text-primary)] tracking-wide mb-16">
               <li className="flex items-center gap-4">
                 <span className="text-ember text-xl">◉</span> study.orosmit21@gmail.com
               </li>
@@ -138,12 +144,12 @@ export default function ContactSection() {
                 <button 
                   key={link} 
                   onClick={() => window.open(getHref(), '_blank')}
-                  className="relative text-chrome group overflow-hidden pb-2 cursor-none border-none bg-transparent"
+                  className="relative text-[var(--text-primary)] group overflow-hidden pb-2 cursor-none border-none bg-transparent"
                   style={{ textAlign: 'left', padding: 0 }}
                 >
                   <span className="relative z-10 group-hover:-translate-y-[120%] block transition-transform duration-300 ease-in-out">{link}</span>
-                  <span className="absolute left-0 top-full block transition-transform duration-300 ease-in-out group-hover:-translate-y-[110%] text-ember">{link}</span>
-                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-ember scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-in-out" />
+                  <span className="absolute left-0 top-full block transition-transform duration-300 ease-in-out group-hover:-translate-y-[110%] text-[var(--accent)]">{link}</span>
+                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--accent)] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-in-out" />
                 </button>
               )})}
             </div>
@@ -175,11 +181,11 @@ export default function ContactSection() {
                 <button 
                   type="submit" 
                   disabled={status === 'loading'}
-                  className="w-full bg-ember text-void py-5 mt-6 font-display font-bold text-xl tracking-widest uppercase hover:bg-chrome hover:text-void transition-colors relative overflow-hidden group disabled:opacity-70 cursor-none"
+                  className="w-full bg-[var(--accent)] text-[var(--bg-primary)] py-5 mt-6 font-display font-bold text-xl tracking-widest uppercase hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)] transition-colors relative overflow-hidden group disabled:opacity-70 cursor-none"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-4">
                     {status === 'loading' ? (
-                       <>{t.contact.sending}<div className="w-5 h-5 border-2 border-void border-t-transparent rounded-full animate-spin" /></>
+                       <>{t.contact.sending}<div className="w-5 h-5 border-2 border-[var(--bg-primary)] border-t-transparent rounded-full animate-spin" /></>
                     ) : (
                       <>{t.contact.send} <span className="text-2xl leading-none font-normal"></span></>
                     )}
@@ -187,7 +193,7 @@ export default function ContactSection() {
                 </button>
 
                 {status === 'error' && (
-                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-ember font-mono text-sm text-center mt-4">
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[var(--accent)] font-mono text-sm text-center mt-4">
                     Something went wrong. Try emailing directly.
                   </motion.p>
                 )}
@@ -198,12 +204,12 @@ export default function ContactSection() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="w-full h-full min-h-[400px] flex items-center justify-center border border-[rgba(139,143,168,0.2)] rounded-2xl bg-void shadow-[0_0_40px_rgba(255,69,0,0.1)] py-16"
+                className="w-full h-full min-h-[400px] flex items-center justify-center border border-[var(--border-subtle)] rounded-2xl bg-[var(--bg-secondary)] shadow-[0_0_40px_rgba(255,69,0,0.1)] py-16"
               >
                 <div className="text-center px-8">
-                  <span className="text-ember text-4xl mb-6 block drop-shadow-[0_0_10px_rgba(255,69,0,0.8)]">✦</span>
-                  <h3 className="text-2xl md:text-4xl font-display font-bold text-chrome mb-6">{t.contact.success_heading}</h3>
-                  <p className="font-mono text-[rgba(139,143,168,1)] text-lg">{t.contact.success_body}</p>
+                  <span className="text-[var(--accent)] text-4xl mb-6 block drop-shadow-[0_0_10px_rgba(255,69,0,0.8)]">✦</span>
+                  <h3 className="text-2xl md:text-4xl font-display font-bold text-[var(--text-primary)] mb-6">{t.contact.success_heading}</h3>
+                  <p className="font-mono text-[var(--text-secondary)] text-lg">{t.contact.success_body}</p>
                 </div>
               </motion.div>
             )}

@@ -23,15 +23,15 @@ export default function TeachingPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--void)', paddingTop: '120px', paddingBottom: '96px' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--bg-primary)', paddingTop: '120px', paddingBottom: '96px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 32px' }}>
         
         {/* Header */}
         <div style={{ marginBottom: '80px', textAlign: 'center' }}>
-          <h1 style={{ fontFamily: 'Syne', fontSize: '64px', fontWeight: '800', color: '#fff', margin: 0, lineHeight: 1.1 }}>
+          <h1 style={{ fontFamily: 'Syne', fontSize: '64px', fontWeight: '800', color: 'var(--text-primary)', margin: 0, lineHeight: 1.1 }}>
             I TEACH THINGS THAT MATTER
           </h1>
-          <div style={{ width: '100px', height: '4px', background: '#FF4500', margin: '24px auto 0' }} />
+          <div style={{ width: '100px', height: '4px', background: 'var(--accent)', margin: '24px auto 0' }} />
         </div>
 
         {/* subjects grid */}
@@ -44,8 +44,9 @@ export default function TeachingPage() {
               transition={{ delay: i * 0.1 }}
               onClick={scrollToContact}
               style={{
-                background: '#080812',
-                border: '1px solid var(--border)',
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border-subtle)',
+
                 borderRadius: '16px',
                 padding: '32px',
                 cursor: 'none',
@@ -54,22 +55,23 @@ export default function TeachingPage() {
                 flexDirection: 'column'
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = 'rgba(255,69,0,0.5)'
-                e.currentTarget.style.boxShadow = '0 0 20px rgba(255,69,0,0.15)'
+                e.currentTarget.style.borderColor = 'var(--accent-hover)'
+                e.currentTarget.style.boxShadow = 'var(--accent-shadow)'
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'var(--border)'
+                e.currentTarget.style.borderColor = 'var(--border-subtle)'
                 e.currentTarget.style.boxShadow = 'none'
               }}
+
             >
-              <div style={{ fontSize: '48px', color: '#FF4500', marginBottom: '32px', filter: 'drop-shadow(0 0 10px rgba(255,69,0,0.5))' }}>
+              <div style={{ fontSize: '48px', color: 'var(--accent)', marginBottom: '32px', filter: 'drop-shadow(0 0 10px var(--accent-glow))' }}>
                 {item.icon}
               </div>
-              <h3 style={{ fontFamily: 'Syne', fontSize: '24px', fontWeight: '700', color: '#fff', marginBottom: '8px' }}>{item.title}</h3>
+              <h3 style={{ fontFamily: 'Syne', fontSize: '24px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px' }}>{item.title}</h3>
               <p style={{ fontFamily: 'Space Mono', fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '32px' }}>{item.tagline}</p>
               
-              <div style={{ marginTop: 'auto', borderTop: '1px solid var(--border)', paddingTop: '16px', color: '#fff', fontFamily: 'Space Mono', fontSize: '12px' }}>
-                 Book a Session <span style={{ color: '#FF4500', marginLeft: '8px' }}>→</span>
+              <div style={{ marginTop: 'auto', borderTop: '1px solid var(--border-subtle)', paddingTop: '16px', color: 'var(--text-secondary)', fontFamily: 'Space Mono', fontSize: '12px' }}>
+                 Book a Session <span style={{ color: 'var(--accent)', marginLeft: '8px' }}>→</span>
               </div>
             </motion.div>
           ))}
@@ -77,21 +79,22 @@ export default function TeachingPage() {
 
         {/* FAQs */}
         <div style={{ maxWidth: '800px', margin: '0 auto', marginBottom: '96px' }}>
-          <h2 style={{ fontFamily: 'Syne', fontSize: '32px', fontWeight: '800', color: '#fff', marginBottom: '40px', textAlign: 'center' }}>FAQ</h2>
+          <h2 style={{ fontFamily: 'Syne', fontSize: '32px', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '40px', textAlign: 'center' }}>FAQ</h2>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {FAQS.map((faq, index) => (
-              <div key={index} style={{ borderBottom: '1px solid var(--border)' }}>
+              <div key={index} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                   style={{
                     width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     background: 'none', border: 'none', padding: '24px 0', cursor: 'none',
-                    textAlign: 'left', fontFamily: 'Syne', fontSize: '20px', fontWeight: '700', color: '#fff'
+                    textAlign: 'left', fontFamily: 'Syne', fontSize: '20px', fontWeight: '700', color: 'var(--text-primary)'
+
                   }}
                 >
                   {faq.q}
-                  <span style={{ color: '#FF4500', fontSize: '24px', transform: openIndex === index ? 'rotate(45deg)' : 'rotate(0)', transition: 'transform 0.3s ease' }}>+</span>
+                  <span style={{ color: 'var(--accent)', fontSize: '24px', transform: openIndex === index ? 'rotate(45deg)' : 'rotate(0)', transition: 'transform 0.3s ease' }}>+</span>
                 </button>
                 <AnimatePresence>
                   {openIndex === index && (
@@ -117,13 +120,13 @@ export default function TeachingPage() {
       {/* CTA STRIP */}
       <div 
         onClick={scrollToContact}
-        style={{ width: '100%', background: '#FF4500', padding: '40px 32px', cursor: 'none', position: 'relative', borderTop: '1px solid #ff5511', borderBottom: '1px solid #ff5511' }}
+        style={{ width: '100%', background: 'var(--accent)', padding: '40px 32px', cursor: 'none', position: 'relative', borderTop: '1px solid var(--accent-border)', borderBottom: '1px solid var(--accent-border)' }}
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '24px' }}>
-           <h3 style={{ color: 'var(--void)', fontFamily: 'Syne', fontWeight: '800', fontSize: '32px', margin: 0 }}>
+           <h3 style={{ color: 'var(--accent-text)', fontFamily: 'Syne', fontWeight: '800', fontSize: '32px', margin: 0 }}>
              CURRENTLY TAKING NEW STUDENTS
            </h3>
-           <div style={{ color: 'var(--void)', fontFamily: 'Syne', fontWeight: '800', fontSize: '20px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px' }}>
+           <div style={{ color: 'var(--accent-text)', fontFamily: 'Syne', fontWeight: '800', fontSize: '20px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px' }}>
              GET IN TOUCH 
              <span>→</span>
            </div>

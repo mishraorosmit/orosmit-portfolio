@@ -49,22 +49,23 @@ function TeachingCard({ item, index }) {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onClick={scrollToContact}
-        className="w-full bg-card border border-[var(--border)] rounded-2xl p-8 min-h-[260px] flex flex-col hover:border-ember/50 hover:shadow-[0_0_20px_rgba(255,69,0,0.15)] transition-all duration-300 relative overflow-hidden group cursor-none"
+        className="w-full bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl p-8 min-h-[260px] flex flex-col hover:border-[var(--accent)]/50 hover:shadow-[0_0_20px_rgba(255,69,0,0.15)] transition-all duration-300 relative overflow-hidden group cursor-none"
+
       >
-        <div className="text-[48px] text-ember mb-auto drop-shadow-[0_0_10px_rgba(255,69,0,0.5)] leading-none select-none">
+        <div style={{ fontSize: '48px', color: 'var(--accent)', marginBottom: '32px', filter: 'drop-shadow(0 0 10px var(--accent-glow))' }}>
           {item.icon}
         </div>
         
         <div className="mt-8">
-          <h3 className="text-xl font-display font-bold text-chrome mb-2 group-hover:text-ember transition-colors">
+          <h3 style={{ fontFamily: 'Syne', fontSize: '24px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px' }}>
             {item.title}
           </h3>
-          <p className="font-mono text-xs text-starDust opacity-50 mb-6 group-hover:opacity-80 transition-opacity">
+          <p style={{ fontFamily: 'Space Mono', fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.6 }}>
             {item.tagline}
           </p>
-          <div className="border-t border-starDust/20 pt-4 flex items-center font-mono text-xs text-chrome group/link transition-colors duration-300 group-hover:border-ember/30">
+          <div className="border-t border-[var(--border-subtle)] pt-4 flex items-center font-mono text-xs text-[var(--text-primary)] group/link transition-colors duration-300 group-hover:border-[var(--accent)]/30">
              {t.teaching.book}
-             <span className="transform ml-2 group-hover/link:translate-x-2 transition-transform text-ember"></span>
+             <span className="transform ml-2 group-hover/link:translate-x-2 transition-transform text-[var(--accent)]"></span>
           </div>
         </div>
       </div>
@@ -82,14 +83,14 @@ export default function TeachingSection() {
   };
 
   return (
-    <section id="teaching"  className="w-full pt-32 bg-void overflow-hidden">
+    <section id="teaching"  className="w-full pt-32 bg-[var(--bg-primary)] overflow-hidden">
       <div className="max-w-7xl mx-auto px-8 mb-32">
         
         <div className="mb-20 text-center md:text-left" ref={headerRef}>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-chrome tracking-tight relative inline-block">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[var(--text-primary)] tracking-tight relative inline-block">
             {t.teaching.heading}
             <div 
-              className="absolute -bottom-4 left-0 h-[2px] bg-ember transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+              className="absolute -bottom-4 left-0 h-[2px] bg-[var(--accent)] transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
               style={{ width: isHeaderInView ? '100%' : '0%' }}
             />
           </h2>
@@ -105,7 +106,7 @@ export default function TeachingSection() {
       {/* CTA STRIP */}
       <div 
         onClick={scrollToContact}
-        className="w-full bg-ember py-10 px-8 cursor-none relative group overflow-hidden border-y border-[#ff5511] hover:bg-[#ff5511] transition-colors duration-300"
+        className="w-full bg-[var(--accent)] py-10 px-8 cursor-none relative group overflow-hidden border-y border-[var(--accent-dark)] hover:bg-[var(--accent-dark)] transition-colors duration-300"
       >
         <div 
           className="absolute inset-0 opacity-10 pointer-events-none mix-blend-multiply"
@@ -113,10 +114,10 @@ export default function TeachingSection() {
         />
         
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-           <h3 className="text-void font-display font-bold text-2xl md:text-3xl tracking-tight m-0">
+           <h3 className="text-[var(--text-on-accent)] font-display font-bold text-2xl md:text-3xl tracking-tight m-0">
              {t.teaching.cta}
            </h3>
-           <div className="text-void font-display font-bold text-lg md:text-xl tracking-widest uppercase flex items-center gap-2 group/btn">
+           <div className="text-[var(--text-on-accent)] font-display font-bold text-lg md:text-xl tracking-widest uppercase flex items-center gap-2 group/btn">
              {t.teaching.get_in_touch}
              <span className="transform group-hover/btn:translate-x-2 transition-transform"></span>
            </div>

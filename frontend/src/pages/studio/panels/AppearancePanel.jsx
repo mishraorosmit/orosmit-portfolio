@@ -14,7 +14,8 @@ const COLORS = [
   { id: '#c084fc', name: 'Violet' }
 ];
 
-export default function AppearancePanel() {
+export default function AppearancePanel({ onNavigate }) {
+
   const [badgePos, setBadgePos] = useState('navbar');
   const [taglines, setTaglines] = useState([]);
   const [soundDefault, setSoundDefault] = useState(false);
@@ -93,7 +94,14 @@ export default function AppearancePanel() {
 
   return (
     <div className="pb-20 max-w-4xl">
-      <h2 className="text-2xl font-display font-bold text-white mb-8 tracking-wider">APPEARANCE</h2>
+      <h1 style={{
+        fontFamily: 'Syne, sans-serif',
+        fontSize: '28px',
+        fontWeight: '800',
+        color: '#ffffff',
+        marginBottom: '32px',
+      }}>APPEARANCE</h1>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {/* AVAILABILITY BADGE */}

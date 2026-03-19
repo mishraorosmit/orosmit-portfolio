@@ -13,14 +13,15 @@ export default function WritingSection() {
   const t = useTranslation()
 
   return (
-    <section id="writing" style={{ padding:'96px 60px', background:'#07070f' }}>
+    <section className="relative w-full py-24 md:py-32 bg-[var(--bg-secondary)] overflow-hidden z-10">
       
       {/* Header */}
       <div style={{ textAlign:'center', marginBottom:'60px' }}>
         <p style={{ fontFamily:'Space Mono', fontSize:'11px', color:'var(--text-muted)', letterSpacing:'0.2em', marginBottom:'12px' }}>
           {t.writing.eyebrow}
         </p>
-        <h2 style={{ fontFamily:'Syne', fontSize:'72px', fontWeight:'800', color:'#fff', margin:0, lineHeight:1 }}>
+        <h2 style={{ fontFamily:'Syne', fontSize:'72px', fontWeight:'800', color:'var(--text-primary)', margin:0, lineHeight:1 }}>
+
           {t.writing.heading}
         </h2>
       </div>
@@ -34,48 +35,29 @@ export default function WritingSection() {
             whileInView={{ opacity:1, y:0 }}
             viewport={{ once:true }}
             transition={{ duration:0.5, delay: i * 0.12 }}
-            style={{
-              background:'linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%)',
-              border:'1px solid var(--border)',
-              borderRadius:'12px',
-              padding:'28px',
-              minHeight:'260px',
-              display:'flex',
-              flexDirection:'column',
-              justifyContent:'space-between',
-              cursor:'none',
-              transition:'all 0.35s ease',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'rgba(255,69,0,0.35)'
-              e.currentTarget.style.transform = 'translateY(-5px)'
-              e.currentTarget.style.boxShadow = '-3px 0 0 #FF4500'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'var(--border)'
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = 'none'
-            }}
+            className="group relative h-[380px] p-8 rounded-3xl border border-[var(--border-subtle)] overflow-hidden cursor-none flex flex-col justify-end hover:border-[var(--accent)] transition-all duration-500"
+            style={{ background: 'linear-gradient(180deg, var(--bg-card) 0%, var(--bg-primary) 100%)' }}
           >
             <div>
               <span style={{
                 fontFamily:'Space Mono', fontSize:'10px', letterSpacing:'0.12em',
-                color:'#FF4500', background:'rgba(255,69,0,0.08)',
+                color:'var(--accent)', background:'var(--accent-bg)',
+                borderColor:'var(--accent-border)',
                 padding:'3px 10px', borderRadius:'3px',
-                border:'1px solid rgba(255,69,0,0.2)'
+                border:'1px solid var(--accent-border)'
+
               }}>
                 {w.type}
               </span>
-              <h3 style={{ fontFamily:'Syne', fontSize:'20px', fontWeight:'700', color:'#fff', margin:'16px 0 10px', lineHeight:1.3 }}>
+              <h3 style={{ fontFamily:'Syne', fontSize:'20px', fontWeight:'700', color:'var(--text-primary)', margin:'16px 0 10px', lineHeight:1.3 }}>
+
                 {w.title}
               </h3>
-              <p style={{ fontFamily:'Space Mono', fontSize:'12px', color:'rgba(255,255,255,0.38)', fontStyle:'italic', lineHeight:1.8, margin:0 }}>
+              <p style={{ fontFamily:'Space Mono', fontSize:'13px', color:'var(--text-secondary)', lineHeight:1.6, opacity:0.8 }}>
                 "{w.excerpt}"
               </p>
             </div>
-            <p style={{ fontFamily:'Space Mono', fontSize:'11px', color:'rgba(255,255,255,0.2)', textAlign:'right', margin:'16px 0 0' }}>
-              {w.year}
-            </p>
+            <span style={{ fontSize:'10px', color:'var(--text-muted)' }}>{w.year}</span>
           </motion.div>
         ))}
       </div>
@@ -86,7 +68,8 @@ export default function WritingSection() {
           onClick={() => navigate('/writing')}
           style={{
             fontFamily:'Space Mono', fontSize:'12px', letterSpacing:'0.15em',
-            color:'#FF4500', background:'none',
+            color:'var(--accent)', background:'none',
+
             border:'1px solid rgba(255,69,0,0.3)',
             padding:'12px 32px', borderRadius:'4px', cursor:'none',
             transition:'all 0.2s ease'

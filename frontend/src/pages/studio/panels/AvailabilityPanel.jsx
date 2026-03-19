@@ -10,7 +10,8 @@ const STATUS_OPTIONS = [
   { id: 'partial', title: 'Limited Availability', desc: 'Selective projects only', color: '#f59e0b' }
 ];
 
-export default function AvailabilityPanel() {
+export default function AvailabilityPanel({ onNavigate }) {
+
   const [currentStatus, setCurrentStatus] = useState('available');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -43,15 +44,22 @@ export default function AvailabilityPanel() {
 
   return (
     <div className="pb-20 max-w-4xl">
-      <h2 className="text-2xl font-display font-bold text-white mb-8 tracking-wider">AVAILABILITY & STATUS</h2>
+      <h1 style={{
+        fontFamily: 'Syne, sans-serif',
+        fontSize: '28px',
+        fontWeight: '800',
+        color: '#ffffff',
+        marginBottom: '32px',
+      }}>AVAILABILITY & STATUS</h1>
+
 
       {/* Current Status Pill */}
       <StudioCard>
         <div className="flex items-center gap-6">
-          <div className="w-5 h-5 rounded-full animate-pulse shadow-[0_0_15px_currentColor]" style={{ backgroundColor: activeOption?.color || '#FF4500', color: activeOption?.color || '#FF4500' }}></div>
+          <div className="w-5 h-5 rounded-full animate-pulse shadow-[0_0_15px_currentColor]" style={{ backgroundColor: activeOption?.color || 'var(--accent)', color: activeOption?.color || 'var(--accent)' }}></div>
           <div>
-            <div className="font-mono text-base tracking-widest uppercase text-white mb-2">{activeOption?.title || 'Unknown Status'}</div>
-            <div className="font-mono text-xs opacity-50">{message || activeOption?.desc}</div>
+            <div className="font-mono text-base tracking-widest uppercase text-[var(--text-primary)] mb-2">{activeOption?.title || 'Unknown Status'}</div>
+            <div className="font-mono text-xs text-[var(--text-muted)]">{message || activeOption?.desc}</div>
           </div>
         </div>
       </StudioCard>
@@ -61,17 +69,17 @@ export default function AvailabilityPanel() {
           <div 
             key={opt.id}
             onClick={() => setCurrentStatus(opt.id)}
-            className="bg-[#07070f] border rounded-[10px] p-6 cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
+            className="bg-[var(--bg-card)] border rounded-[10px] p-6 cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
             style={{ 
-              borderColor: currentStatus === opt.id ? opt.color : 'rgba(255,255,255,0.05)',
+              borderColor: currentStatus === opt.id ? opt.color : 'var(--border-subtle)',
               boxShadow: currentStatus === opt.id ? `0 0 20px ${opt.color}20` : 'none'
             }}
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: opt.color }}></div>
-              <div className="font-mono text-[11px] tracking-widest text-white">{opt.title}</div>
+              <div className="font-mono text-[11px] tracking-widest text-[var(--text-primary)]">{opt.title}</div>
             </div>
-            <p className="font-mono text-[10px] opacity-40 leading-relaxed m-0">{opt.desc}</p>
+            <p className="font-mono text-[10px] text-[var(--text-muted)] leading-relaxed m-0">{opt.desc}</p>
           </div>
         ))}
       </div>

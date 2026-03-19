@@ -24,18 +24,20 @@ export default function ThemeToggle() {
         onClick={handleToggle}
         className="relative flex items-center justify-center w-[44px] h-[44px] rounded-full cursor-none transition-all duration-300 overflow-hidden"
         style={{
-          background: isAnimating ? 'rgba(255,69,0,0.8)' : 'rgba(5,5,8,0.8)',
-          border: '1px solid rgba(192,192,192,0.15)',
+          background: isAnimating ? 'var(--accent)' : 'var(--bg-overlay)',
+          border: '1px solid var(--border-default)',
           backdropFilter: 'blur(10px)'
         }}
+
         onMouseEnter={(e) => {
           e.currentTarget.style.borderColor = 'rgba(255,69,0,0.4)';
           e.currentTarget.style.transform = 'scale(1.05)';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(192,192,192,0.15)';
+          e.currentTarget.style.borderColor = 'var(--border-default)';
           e.currentTarget.style.transform = 'scale(1)';
         }}
+
       >
         <div 
           className="flex items-center justify-center w-full h-full transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
@@ -63,10 +65,10 @@ export default function ThemeToggle() {
 
       {showTooltip && (
         <div 
-          className="absolute left-[calc(100%+16px)] px-3 py-2 rounded text-white text-[11px] font-mono tracking-widest whitespace-nowrap pointer-events-none"
+          className="absolute left-[calc(100%+16px)] px-3 py-2 rounded text-[var(--text-primary)] text-[11px] font-mono tracking-widest whitespace-nowrap pointer-events-none"
           style={{
-            background: '#0d0d18',
-            border: '1px solid rgba(255,255,255,0.1)'
+            background: 'var(--bg-secondary)',
+            border: '1px solid var(--border-subtle)'
           }}
         >
           {isDark ? 'Light Mode' : 'Dark Mode'}

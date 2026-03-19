@@ -83,9 +83,10 @@ export default function Navbar() {
           scrolled ? 'backdrop-blur-[20px] border-b py-4' : 'bg-transparent'
         }`}
         style={{
-          background: scrolled ? 'var(--nav-bg)' : 'transparent',
-          borderBottomColor: scrolled ? 'var(--border)' : 'transparent'
+          background: scrolled ? 'var(--navbar-bg)' : 'transparent',
+          borderBottom: scrolled ? '1px solid var(--border-subtle)' : 'none'
         }}
+
       >
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           {/* Logo */}
@@ -96,7 +97,8 @@ export default function Navbar() {
             onMouseLeave={() => setCursorVariant('default')}
             onClick={() => setMenuOpen(false)}
           >
-            <span className="text-chrome">O</span><span className="text-ember">M</span>
+            <span className="text-[var(--text-primary)]">O</span><span className="text-[var(--accent)]">M</span>
+
           </Link>
 
           {/* Desktop Links */}
@@ -108,7 +110,8 @@ export default function Navbar() {
                 <button 
                   key={item.name} 
                   onClick={() => navigateTo(item)}
-                  className={`relative flex flex-col items-center group cursor-none transition-opacity duration-300 ${isActive ? 'opacity-100 text-chrome' : 'opacity-50 text-chrome hover:opacity-100'}`}
+                  className={`relative flex flex-col items-center group cursor-none transition-opacity duration-300 ${isActive ? 'opacity-100 text-[var(--text-primary)]' : 'opacity-50 text-[var(--text-secondary)] hover:opacity-100'}`}
+
                   onMouseEnter={() => setCursorVariant('hover')}
                   onMouseLeave={() => setCursorVariant('default')}
                 >
@@ -129,7 +132,8 @@ export default function Navbar() {
             >
               <MagneticButton 
                 onClick={scrollToContact}
-                className="bg-ember text-void font-bold text-xs uppercase px-4 py-1.5 shadow-[0_0_15px_rgba(255,69,0,0.3)] hover:shadow-[0_0_20px_rgba(255,69,0,0.5)] cursor-none hover:bg-chrome transition-colors"
+                className="bg-[var(--accent)] text-[var(--bg-primary)] font-bold text-xs uppercase px-4 py-1.5 shadow-[0_0_15px_var(--accent-glow)] hover:shadow-[0_0_20px_var(--accent-glow)] cursor-none hover:bg-[var(--text-primary)] transition-colors"
+
                 style={{ borderRadius: '9999px' }}
               >
                 {t.nav.hire}
@@ -143,15 +147,15 @@ export default function Navbar() {
             >
               <motion.span 
                 animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }} 
-                className="w-full h-[2px] bg-chrome block" 
+                className="w-full h-[2px] bg-[var(--text-primary)] block" 
               />
               <motion.span 
                 animate={menuOpen ? { opacity: 0 } : { opacity: 1 }} 
-                className="w-[80%] h-[2px] bg-chrome block ml-auto" 
+                className="w-[80%] h-[2px] bg-[var(--text-primary)] block ml-auto" 
               />
               <motion.span 
                 animate={menuOpen ? { rotate: -45, y: -7, width: '100%' } : { rotate: 0, y: 0, width: '100%' }} 
-                className="w-full h-[2px] bg-chrome block" 
+                className="w-full h-[2px] bg-[var(--text-primary)] block" 
               />
             </button>
           </div>
@@ -166,7 +170,8 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { delay: 0.2 } }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-void/98 backdrop-blur-3xl flex flex-col items-center justify-center gap-8 md:hidden"
+            className="fixed inset-0 z-40 bg-[var(--bg-overlay)] backdrop-blur-3xl flex flex-col items-center justify-center gap-8 md:hidden"
+
           >
             {NAV_LINKS.map((item, i) => (
               <motion.button
@@ -176,7 +181,8 @@ export default function Navbar() {
                 transition={{ delay: i * 0.05 }}
                 key={item.name}
                 onClick={() => navigateTo(item)}
-                className="text-chrome font-mono text-xl tracking-widest uppercase cursor-none"
+                className="text-[var(--text-primary)] font-mono text-xl tracking-widest uppercase cursor-none"
+
               >
                 {item.name}
               </motion.button>
@@ -187,7 +193,8 @@ export default function Navbar() {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ delay: 0.3 }}
                 onClick={scrollToContact}
-                className="bg-ember text-void font-bold text-sm tracking-widest uppercase px-8 py-3 mt-4 rounded-full shadow-[0_0_15px_rgba(255,69,0,0.3)] cursor-none"
+                className="bg-[var(--accent)] text-[var(--bg-primary)] font-bold text-sm tracking-widest uppercase px-8 py-3 mt-4 rounded-full shadow-[0_0_15px_var(--accent-glow)] cursor-none"
+
               >
                 {t.nav.hire}
             </motion.button>

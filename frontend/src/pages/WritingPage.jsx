@@ -26,7 +26,7 @@ export default function WritingPage() {
         {/* Hero */}
         <div style={{ marginBottom: '64px' }}>
           <p style={{ fontFamily: 'Space Mono', fontSize: '12px', letterSpacing: '0.3em', color: 'var(--text-secondary)', marginBottom: '16px' }}>ARCHIVE</p>
-          <h1 style={{ fontFamily: 'Syne', fontSize: '80px', fontWeight: '800', color: '#fff', margin: 0, lineHeight: 1 }}>WRITING</h1>
+          <h1 style={{ fontFamily: 'Syne', fontSize: '80px', fontWeight: '800', color: 'var(--text-primary)', margin: 0, lineHeight: 1 }}>WRITING</h1>
         </div>
 
         {/* Filters */}
@@ -38,8 +38,9 @@ export default function WritingPage() {
               style={{
                 fontFamily: 'Space Mono', fontSize: '11px', letterSpacing: '0.1em',
                 padding: '8px 24px', borderRadius: '4px', cursor: 'none',
-                background: activeTab === tab ? '#FF4500' : 'transparent',
-                color: activeTab === tab ? '#000' : '#fff',
+                background: activeTab === tab ? 'var(--accent)' : 'transparent',
+                color: activeTab === tab ? 'var(--bg-primary)' : 'var(--text-primary)',
+
                 border: activeTab === tab ? '1px solid #FF4500' : '1px solid rgba(255,255,255,0.2)',
                 transition: 'all 0.2s ease'
               }}
@@ -86,12 +87,12 @@ export default function WritingPage() {
                 }}
               >
                 <div>
-                  <span style={{ fontFamily: 'Space Mono', fontSize: '10px', color: '#FF4500', background: 'rgba(255,69,0,0.08)', padding: '4px 8px', borderRadius: '2px', border: '1px solid rgba(255,69,0,0.2)' }}>
+                  <span style={{ fontFamily: 'Space Mono', fontSize: '10px', color: 'var(--accent)', background: 'var(--accent-bg)', padding: '4px 8px', borderRadius: '2px', border: '1px solid var(--accent-border)' }}>
                     {w.type}
                   </span>
                 </div>
                 <div style={{ margin: 'auto 0' }}>
-                  <h3 style={{ fontFamily: 'Syne', fontSize: '20px', fontWeight: '700', color: '#fff', marginTop: '16px', marginBottom: '12px', lineHeight: 1.3 }}>{w.title}</h3>
+                  <h3 style={{ fontFamily: 'Syne', fontSize: '20px', fontWeight: '700', color: 'var(--text-primary)', marginTop: '16px', marginBottom: '12px', lineHeight: 1.3 }}>{w.title}</h3>
                   <p style={{ fontFamily: 'Space Mono', fontSize: '13px', fontStyle: 'italic', color: 'rgba(255,255,255,0.45)', margin: 0, lineHeight: 1.7 }}>{w.excerpt}</p>
                 </div>
                 <div style={{ textAlign: 'right', marginTop: '16px' }}>
@@ -128,12 +129,13 @@ export default function WritingPage() {
             >
               <button
                 onClick={() => setSelectedPiece(null)}
-                style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '32px', cursor: 'none' }}
+                style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: 'var(--text-primary)', fontSize: '32px', cursor: 'none' }}
+
               >
                 ×
               </button>
-              <span style={{ fontFamily: 'Space Mono', fontSize: '11px', color: '#FF4500' }}>{selectedPiece.type} · {selectedPiece.year}</span>
-              <h2 style={{ fontFamily: 'Syne', fontSize: '32px', fontWeight: '800', color: '#fff', margin: '16px 0 32px' }}>{selectedPiece.title}</h2>
+              <span style={{ fontFamily: 'Space Mono', fontSize: '11px', color: 'var(--accent)' }}>{selectedPiece.type} · {selectedPiece.year}</span>
+              <h2 style={{ fontFamily: 'Syne', fontSize: '32px', fontWeight: '800', color: 'var(--text-primary)', margin: '16px 0 32px' }}>{selectedPiece.title}</h2>
               <p style={{ fontFamily: 'Space Mono', fontSize: '14px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.8 }}>
                 {selectedPiece.fullText}
               </p>

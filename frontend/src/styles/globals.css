@@ -5,68 +5,122 @@
 @tailwind utilities;
 
 :root[data-theme="dark"] {
+  /* Backgrounds */
   --bg-primary: #050508;
-  --bg-secondary: #0d0d18;
-  --bg-card: #0a0a12;
+  --bg-secondary: #0a0a12;
+  --bg-card: #0d0d18;
+  --bg-card-hover: #111120;
+  --bg-overlay: rgba(5,5,8,0.85);
+  --bg-input: transparent;
+  
+  /* Text */
   --text-primary: #ffffff;
-  --text-secondary: rgba(192,192,192,0.7);
-  --text-muted: rgba(192,192,192,0.3);
+  --text-secondary: rgba(255,255,255,0.65);
+  --text-muted: rgba(255,255,255,0.28);
+  --text-placeholder: rgba(255,255,255,0.2);
+  
+  /* Borders */
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-default: rgba(255,255,255,0.1);
+  --border-strong: rgba(255,255,255,0.2);
+  --border-input: rgba(192,192,192,0.2);
+  --border-input-focus: #FF4500;
+  
+  /* Accent stays same in both themes */
   --accent: #FF4500;
-  --border: rgba(192,192,192,0.08);
-  --border-hover: rgba(255,69,0,0.4);
-  --glow: rgba(255,69,0,0.15);
-  --chrome: #C0C0C0;
+  --accent-bg: rgba(255,69,0,0.08);
+  --accent-border: rgba(255,69,0,0.25);
+  --accent-glow: rgba(255,69,0,0.15);
+  
+  /* Special */
+  --navbar-bg: rgba(5,5,8,0.85);
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --grid-line: rgba(255,69,0,0.04);
+  --scrollbar-thumb: rgba(255,69,0,0.3);
+  --scrollbar-track: #0a0a12;
+  
+  /* vexx.tm brand section stays pure black always */
+  --brand-bg: #000000;
+  --brand-text: #ffffff;
+  
+  /* Legacy/Compatibility */
   --void: var(--bg-primary);
-  --ember: var(--accent);
+  --chrome: var(--text-primary);
   --star-dust: #8B8FA8;
-  --nav-bg: rgba(5,5,8,0.85);
-  --canvas-bg: transparent;
-  --card-shadow: none;
+  --ember: var(--accent);
 }
 
 :root[data-theme="light"] {
-  --bg-primary: #f5f0eb;
-  --bg-secondary: #ede8e0;
+  /* Backgrounds */
+  --bg-primary: #f2ede8;
+  --bg-secondary: #e8e2da;
   --bg-card: #ffffff;
-  --text-primary: #0a0805;
-  --text-secondary: rgba(30,20,10,0.7);
-  --text-muted: rgba(30,20,10,0.4);
+  --bg-card-hover: #faf7f4;
+  --bg-overlay: rgba(242,237,232,0.9);
+  --bg-input: transparent;
+  
+  /* Text */
+  --text-primary: #0f0c0a;
+  --text-secondary: rgba(15,12,10,0.65);
+  --text-muted: rgba(15,12,10,0.38);
+  --text-placeholder: rgba(15,12,10,0.3);
+  
+  /* Borders */
+  --border-subtle: rgba(15,12,10,0.06);
+  --border-default: rgba(15,12,10,0.12);
+  --border-strong: rgba(15,12,10,0.25);
+  --border-input: rgba(15,12,10,0.25);
+  --border-input-focus: #FF4500;
+  
+  /* Accent same */
   --accent: #FF4500;
-  --border: rgba(30,20,10,0.1);
-  --border-hover: rgba(255,69,0,0.5);
-  --glow: rgba(255,69,0,0.1);
-  --chrome: var(--text-primary);
+  --accent-bg: rgba(255,69,0,0.08);
+  --accent-border: rgba(255,69,0,0.3);
+  --accent-glow: rgba(255,69,0,0.12);
+  
+  /* Special */
+  --navbar-bg: rgba(242,237,232,0.88);
+  --shadow: 0 4px 24px rgba(15,12,10,0.12);
+  --grid-line: rgba(255,69,0,0.05);
+  --scrollbar-thumb: rgba(255,69,0,0.4);
+  --scrollbar-track: #e8e2da;
+  
+  /* vexx.tm stays dark even in light mode */
+  --brand-bg: #0a0008;
+  --brand-text: #ffffff;
+
+  /* Legacy/Compatibility */
   --void: var(--bg-primary);
-  --ember: var(--accent);
+  --chrome: var(--text-primary);
   --star-dust: #8B8FA8;
-  --nav-bg: rgba(245,240,235,0.85);
-  --canvas-bg: #f0ebe3;
-  --card-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+  --ember: var(--accent);
 }
 
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+
 body {
-  background-color: var(--void);
-  color: var(--chrome);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: 'Syne', sans-serif;
   overflow-x: hidden;
 }
 
 *, *::before, *::after {
   cursor: none !important;
+  transition: 
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
 }
 
 /* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--void); 
-}
- 
-::-webkit-scrollbar-thumb {
-  background: var(--star-dust); 
-  border-radius: 4px;
+::-webkit-scrollbar { width: 4px }
+::-webkit-scrollbar-track { background: var(--scrollbar-track) }
+::-webkit-scrollbar-thumb { 
+  background: var(--scrollbar-thumb); 
+  border-radius: 2px 
 }
 
 ::-webkit-scrollbar-thumb:hover {

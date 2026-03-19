@@ -46,11 +46,13 @@ export default function HeroSection() {
   const word2 = "MISHRA".split("");
 
   return (
-    <section id="hero"  ref={containerRef} className="relative min-h-screen w-full flex flex-col md:flex-row items-center justify-between px-8 max-w-[1440px] mx-auto overflow-hidden text-chrome">
+    <section id="hero"  ref={containerRef} className="relative min-h-screen w-full flex flex-col md:flex-row items-center justify-between px-8 max-w-[1440px] mx-auto overflow-hidden text-[var(--text-primary)]">
+
       
       {/* LEFT SIDE (60%) */}
       <div className="w-full md:w-[60%] flex flex-col z-10 pt-32 md:pt-0">
-        <p className="font-mono text-sm tracking-widest text-starDust mb-6">{t.hero.available}</p>
+        <p className="font-mono text-sm tracking-widest text-[var(--text-muted)] mb-6">{t.hero.available}</p>
+
         
         <h1 className="text-7xl md:text-[8rem] lg:text-[10rem] font-display font-bold leading-[0.85] tracking-tighter mix-blend-difference mb-6">
           <div className="overflow-hidden flex">
@@ -89,18 +91,20 @@ export default function HeroSection() {
           <div onMouseEnter={() => setCursorVariant('hover')} onMouseLeave={() => setCursorVariant('default')}>
             <MagneticButton 
               onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-ember text-void font-bold uppercase py-4 px-8 border border-ember border-solid shadow-[0_0_20px_rgba(255,69,0,0.3)] hover:shadow-[0_0_30px_rgba(255,69,0,0.5)]"
+              className="bg-[var(--accent)] text-[var(--bg-primary)] font-bold uppercase py-4 px-8 border border-[var(--accent)] border-solid shadow-[0_0_20px_var(--accent-glow)] hover:shadow-[0_0_30px_var(--accent-glow)]"
             >
               {t.hero.cta_work}
             </MagneticButton>
+
           </div>
           <div onMouseEnter={() => setCursorVariant('hover')} onMouseLeave={() => setCursorVariant('default')}>
             <MagneticButton 
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-transparent text-chrome font-bold uppercase py-4 px-8 border border-chrome border-solid hover:bg-white hover:text-void"
+              className="bg-transparent text-[var(--text-primary)] font-bold uppercase py-4 px-8 border border-[var(--text-primary)] border-solid hover:bg-[var(--text-primary)] hover:text-[var(--bg-primary)]"
             >
               {t.hero.cta_hire}
             </MagneticButton>
+
           </div>
         </div>
       </div>
@@ -112,12 +116,13 @@ export default function HeroSection() {
       </div>
 
       {/* BOTTOM SCROLL INDICATOR */}
-      <div className="absolute bottom-12 left-8 md:left-auto md:right-8 flex flex-col items-center gap-4 text-starDust opacity-70">
+      <div className="absolute bottom-12 left-8 md:left-auto md:right-8 flex flex-col items-center gap-4 text-[var(--text-muted)] opacity-70">
         <span className="font-mono text-xs tracking-[0.2em] transform rotate-90 translate-y-[-20px] origin-bottom mb-4">SCROLL</span>
-        <div className="w-[1px] h-10 bg-starDust/20 relative overflow-hidden">
-          <div className="absolute top-0 w-full bg-chrome animate-drop-line" />
+        <div className="w-[1px] h-10 bg-[var(--border-default)] relative overflow-hidden">
+          <div className="absolute top-0 w-full bg-[var(--text-primary)] animate-drop-line" />
         </div>
       </div>
+
     </section>
   );
 }

@@ -4,7 +4,8 @@ import StudioButton from '../components/StudioButton';
 import StudioInput from '../components/StudioInput';
 import studioApi from '@/lib/studioApi';
 
-export default function WritingPanel() {
+export default function WritingPanel({ onNavigate }) {
+
   const [view, setView] = useState('list');
   const [writings, setWritings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,8 +29,9 @@ export default function WritingPanel() {
     setLoading(true);
     try {
       const res = await studioApi.get('/writing/').catch(() => studioApi.get('/blog/'));
-      setWritings(Array.isArray(res.data) ? res.data : []);
+      setWritings(Array.isArray(res.data) ? res.data : (res.data.results || []));
     } catch(e) { console.error(e); }
+
     setLoading(false);
   };
 
@@ -125,9 +127,15 @@ export default function WritingPanel() {
   return (
     <div className="pb-20 max-w-5xl">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl font-display font-bold text-white tracking-wider">WRITING</h2>
+        <h1 style={{
+          fontFamily: 'Syne, sans-serif',
+          fontSize: '28px',
+          fontWeight: '800',
+          color: '#ffffff',
+        }}>WRITING</h1>
         <StudioButton onClick={() => { setFormData(getEmptyForm()); setView('form'); }}>ADD NEW PIECE +</StudioButton>
       </div>
+
 
       <StudioCard>
         {loading ? <div className="text-white opacity-50 font-mono text-sm py-8 text-center">LOADING...</div> : (

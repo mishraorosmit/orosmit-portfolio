@@ -5,7 +5,8 @@ import StudioInput from '../components/StudioInput';
 import StudioToggle from '../components/StudioToggle';
 import studioApi from '@/lib/studioApi';
 
-export default function ProjectsPanel() {
+export default function ProjectsPanel({ onNavigate }) {
+
   const [view, setView] = useState('list'); // 'list' | 'form'
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,10 +36,11 @@ export default function ProjectsPanel() {
     setLoading(true);
     try {
       const res = await studioApi.get('/portfolio/');
-      setProjects(res.data);
+      setProjects(Array.isArray(res.data) ? res.data : (res.data.results || []));
     } catch(e) { console.error(e); }
     setLoading(false);
   };
+
 
   useEffect(() => {
     fetchProjects();
@@ -152,9 +154,15 @@ export default function ProjectsPanel() {
   return (
     <div className="pb-20 max-w-5xl">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl font-display font-bold text-white tracking-wider">PROJECTS</h2>
+        <h1 style={{
+          fontFamily: 'Syne, sans-serif',
+          fontSize: '28px',
+          fontWeight: '800',
+          color: '#ffffff',
+        }}>PROJECTS</h1>
         <StudioButton onClick={() => { setFormData(getEmptyForm()); setView('form'); }}>ADD NEW PROJECT +</StudioButton>
       </div>
+
 
       <StudioCard>
         {loading ? <div className="text-white opacity-50 font-mono text-sm py-8 text-center">LOADING...</div> : (

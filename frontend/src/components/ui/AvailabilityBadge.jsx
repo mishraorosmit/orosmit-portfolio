@@ -51,12 +51,12 @@ export default function AvailabilityBadge() {
   const currentConfig = config[data.status] || config.available;
 
   return (
-    <div 
+    <div
       className="relative flex items-center justify-center cursor-none hidden md:flex"
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
-      <div 
+      <div
         className="px-3 py-1 rounded-full flex items-center justify-center whitespace-nowrap"
         style={{
           background: currentConfig.background,
@@ -67,7 +67,7 @@ export default function AvailabilityBadge() {
           color: currentConfig.dot,
         }}
       >
-        <span 
+        <span
           style={{
             display: 'inline-block',
             marginRight: '6px',
@@ -83,18 +83,19 @@ export default function AvailabilityBadge() {
       </div>
 
       {showTooltip && (
-        <div 
+        <div
           style={{
             position: 'absolute',
             top: '100%',
             right: 0,
             marginTop: '8px',
             background: 'var(--bg-secondary)',
-            border: '1px solid rgba(255,255,255,0.1)',
+            border: '1px solid var(--border-subtle)',
             fontFamily: "'Space Mono', monospace",
             fontSize: '11px',
-            color: 'white',
+            color: 'var(--text-primary)',
             borderRadius: '4px',
+
             padding: '8px 12px',
             whiteSpace: 'nowrap',
             zIndex: 100,

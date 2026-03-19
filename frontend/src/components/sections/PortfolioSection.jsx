@@ -24,16 +24,18 @@ export default function PortfolioSection() {
     : projects.filter(p => p.category === active.toLowerCase())
 
   return (
-    <section id="portfolio" style={{ padding:'96px 60px', background:'var(--bg-primary)' }}>
+    <section id="portfolio" className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] overflow-hidden z-20">
       
       {/* Header */}
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'48px' }}>
-        <h2 style={{ fontFamily:'Syne', fontSize:'56px', fontWeight:'800', color:'#fff', margin:0 }}>
+        <h2 style={{ fontFamily:'Syne', fontSize:'56px', fontWeight:'800', color:'var(--text-primary)', margin:0 }}>
+
           {t.portfolio.heading}
         </h2>
         <button
           onClick={() => navigate('/portfolio')}
-          style={{ fontFamily:'Space Mono', fontSize:'12px', color:'#FF4500', background:'none', border:'none', cursor:'none', letterSpacing:'0.1em' }}
+          style={{ fontFamily:'Space Mono', fontSize:'12px', color:'var(--accent)', background:'none', border:'none', cursor:'none', letterSpacing:'0.1em' }}
+
         >
           {t.portfolio.see_all}
         </button>
@@ -48,10 +50,11 @@ export default function PortfolioSection() {
             style={{
               fontFamily:'Space Mono', fontSize:'11px', letterSpacing:'0.1em',
               padding:'8px 20px', borderRadius:'4px', cursor:'none',
-              background: active === cat ? '#FF4500' : 'transparent',
-              color: active === cat ? '#000' : '#fff',
-              border: active === cat ? '1px solid #FF4500' : '1px solid rgba(255,255,255,0.2)',
+              background: active === cat ? 'var(--accent)' : 'transparent',
+              color: active === cat ? 'var(--bg-primary)' : 'var(--text-primary)',
+              border: `1px solid ${active === cat ? 'var(--accent)' : 'var(--border-strong)'}`,
               transition:'all 0.2s ease'
+
             }}
           >
             {cat}
@@ -70,32 +73,24 @@ export default function PortfolioSection() {
               animate={{ opacity:1, y:0 }}
               exit={{ opacity:0, scale:0.95 }}
               transition={{ duration:0.35 }}
-              style={{
-                background: p.bg,
-                border:'1px solid rgba(255,255,255,0.07)',
-                borderRadius:'12px',
-                overflow:'hidden',
-                cursor:'none',
-                display: 'flex',
-                flexDirection: 'column'
-              }}
+              className="group relative bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-3xl overflow-hidden cursor-none hover:border-[var(--accent)] transition-all duration-500 h-[450px]"
               onMouseEnter={e => {
                 e.currentTarget.style.borderColor = 'rgba(255,69,0,0.4)'
                 e.currentTarget.style.transform = 'translateY(-4px)'
                 e.currentTarget.style.transition = 'all 0.3s ease'
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+                e.currentTarget.style.borderColor = 'var(--border-subtle)'
                 e.currentTarget.style.transform = 'translateY(0)'
               }}
             >
               {/* Image placeholder */}
               <div style={{
                 height:'180px',
-                background:`linear-gradient(135deg, rgba(255,69,0,0.12), rgba(0,0,0,0.9))`,
+                background:`linear-gradient(135deg, var(--accent-bg), rgba(0,0,0,0.9))`,
                 display:'flex', alignItems:'center', justifyContent:'center'
               }}>
-                <span style={{ fontFamily:'Syne', fontSize:'52px', fontWeight:'800', color:'rgba(255,255,255,0.06)' }}>
+                <span style={{ fontFamily:'Syne', fontSize:'52px', fontWeight:'800', color:'var(--text-muted)', opacity: 0.1 }}>
                   {p.title.split('').slice(0,2).join('')}
                 </span>
               </div>
@@ -103,18 +98,22 @@ export default function PortfolioSection() {
               <div style={{ padding:'20px' }}>
                 <span style={{
                   fontFamily:'Space Mono', fontSize:'10px', letterSpacing:'0.1em',
-                  color:'#FF4500', background:'rgba(255,69,0,0.08)',
+                  color:'var(--accent)', background:'var(--accent-bg)',
+                  borderColor:'var(--accent-border)',
                   padding:'3px 8px', borderRadius:'3px',
-                  border:'1px solid rgba(255,69,0,0.2)'
+                  border:'1px solid var(--accent-border)'
+
                 }}>
                   {p.category.toUpperCase()}
                 </span>
-                <h3 style={{ fontFamily:'Syne', fontSize:'17px', fontWeight:'700', color:'#fff', margin:'10px 0 8px' }}>
+                <h3 style={{ fontFamily:'Syne', fontSize:'17px', fontWeight:'700', color:'var(--text-primary)', margin:'10px 0 8px' }}>
+
                   {p.title}
                 </h3>
-                <p style={{ fontFamily:'Space Mono', fontSize:'11px', color:'rgba(255,255,255,0.3)', margin:0 }}>
+                <div style={{ fontFamily:'Space Mono', fontSize:'10px', color:'var(--text-muted)', display:'flex', gap:'12px' }}>
+
                   {p.year} · {p.tags.join(' · ')}
-                </p>
+                </div>
               </div>
             </motion.div>
           ))}

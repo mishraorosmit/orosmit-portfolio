@@ -32,7 +32,7 @@ export default function PortfolioPage() {
         {/* Header */}
         <div style={{ marginBottom: '64px' }}>
           <p style={{ fontFamily: 'Space Mono', fontSize: '12px', letterSpacing: '0.3em', color: 'var(--text-secondary)', marginBottom: '16px' }}>CATALOGUE</p>
-          <h1 style={{ fontFamily: 'Syne', fontSize: '80px', fontWeight: '800', color: '#fff', margin: 0, lineHeight: 1 }}>ALL WORK</h1>
+          <h1 style={{ fontFamily: 'Syne', fontSize: '80px', fontWeight: '800', color: 'var(--text-primary)', margin: 0, lineHeight: 1 }}>ALL WORK</h1>
         </div>
 
         {/* Filters */}
@@ -44,8 +44,9 @@ export default function PortfolioPage() {
               style={{
                 fontFamily:'Space Mono', fontSize:'11px', letterSpacing:'0.1em',
                 padding:'8px 20px', borderRadius:'4px', cursor:'none',
-                background: active === cat ? '#FF4500' : 'transparent',
-                color: active === cat ? '#000' : '#fff',
+                background: active === cat ? 'var(--accent)' : 'transparent',
+                color: active === cat ? 'var(--bg-primary)' : 'var(--text-primary)',
+
                 border: active === cat ? '1px solid #FF4500' : '1px solid rgba(255,255,255,0.2)',
                 transition:'all 0.2s ease'
               }}
@@ -109,13 +110,15 @@ export default function PortfolioPage() {
                 <div style={{ padding:'20px' }}>
                   <span style={{
                     fontFamily:'Space Mono', fontSize:'10px', letterSpacing:'0.1em',
-                    color:'#FF4500', background:'rgba(255,69,0,0.08)',
+                    color:'var(--accent)', background:'var(--accent-bg)',
+                    borderColor:'var(--accent-border)',
+
                     padding:'3px 8px', borderRadius:'3px',
                     border:'1px solid rgba(255,69,0,0.2)'
                   }}>
                     {p.category.toUpperCase()}
                   </span>
-                  <h3 style={{ fontFamily:'Syne', fontSize:'20px', fontWeight:'700', color:'#fff', margin:'12px 0 8px' }}>
+                  <h3 style={{ fontFamily:'Syne', fontSize:'20px', fontWeight:'700', color:'var(--text-primary)', margin:'12px 0 8px' }}>
                     {p.title}
                   </h3>
                   <p style={{ fontFamily:'Space Mono', fontSize:'12px', color:'rgba(255,255,255,0.3)', margin:0 }}>

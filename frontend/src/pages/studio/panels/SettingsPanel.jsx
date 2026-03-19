@@ -6,7 +6,8 @@ import useStore from '@/store/useStore';
 import studioApi from '@/lib/studioApi';
 import api from '@/lib/api';
 
-export default function SettingsPanel() {
+export default function SettingsPanel({ onNavigate }) {
+
   const { studioLogout } = useStore();
   const [siteInfo, setSiteInfo] = useState({
     site_name: '',
@@ -71,7 +72,14 @@ export default function SettingsPanel() {
 
   return (
     <div className="pb-20 max-w-4xl">
-      <h2 className="text-2xl font-display font-bold text-white mb-8 tracking-wider">SETTINGS</h2>
+      <h1 style={{
+        fontFamily: 'Syne, sans-serif',
+        fontSize: '28px',
+        fontWeight: '800',
+        color: '#ffffff',
+        marginBottom: '32px',
+      }}>SETTINGS</h1>
+
 
       {/* STUDIO PASSWORD CHANGE */}
       <StudioCard title="STUDIO PASSWORD">

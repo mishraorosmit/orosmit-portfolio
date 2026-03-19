@@ -67,18 +67,19 @@ function SkillCard({ skill, index }) {
         className="w-full h-full bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-8 flex flex-col justify-end min-h-[280px] hover:border-ember hover:shadow-[0_0_20px_rgba(255,69,0,0.3)] transition-colors duration-300 relative overflow-hidden group"
       >
         {/* Background Number */}
-        <span className="absolute top-4 right-6 font-mono font-bold text-[96px] text-chrome opacity-[0.06] select-none pointer-events-none transform translate-x-4 -translate-y-4 group-hover:text-ember transition-colors duration-500">
+        <span className="absolute top-4 right-6 font-mono font-bold text-[96px] text-[var(--text-primary)] opacity-[0.04] select-none pointer-events-none transform translate-x-4 -translate-y-4 group-hover:text-[var(--accent)] transition-colors duration-500">
           {numberStr}
         </span>
         
         <div className="relative z-10 pointer-events-none">
-          <h3 className="text-2xl font-display font-bold text-chrome mb-4 tracking-tight group-hover:text-ember transition-colors duration-300">
+          <h3 className="text-2xl font-display font-bold text-[var(--text-primary)] mb-4 tracking-tight group-hover:text-[var(--accent)] transition-colors duration-300">
             {skill.name}
           </h3>
-          <p className="font-mono text-sm text-starDust leading-relaxed">
+          <p className="font-mono text-sm text-[var(--text-muted)] leading-relaxed">
             {skill.desc}
           </p>
         </div>
+
       </div>
     </motion.div>
   );
@@ -88,7 +89,8 @@ export default function SkillsSection() {
   const t = useTranslation();
 
   return (
-    <section id="skills"  className="relative w-full py-24 md:py-32 bg-void border-t border-starDust/20 overflow-hidden">
+    <section id="skills"  className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] border-t border-[var(--border-subtle)] overflow-hidden">
+
       
       {/* 3D Orb Canvas Wrapper */}
       <div className="absolute top-16 right-8 w-[300px] h-[300px] z-0 pointer-events-none hidden lg:block">
@@ -104,9 +106,10 @@ export default function SkillsSection() {
           transition={{ duration: 0.8 }}
           className="mb-24 mt-8"
         >
-          <h2 className="text-chrome font-display uppercase leading-[0.9]">
-            <span className="block text-5xl md:text-7xl font-bold tracking-tighter text-starDust">{t.skills.heading}</span>
+          <h2 className="text-[var(--text-primary)] font-display uppercase leading-[0.9]">
+            <span className="block text-5xl md:text-7xl font-bold tracking-tighter text-[var(--text-muted)]">{t.skills.heading}</span>
           </h2>
+
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
