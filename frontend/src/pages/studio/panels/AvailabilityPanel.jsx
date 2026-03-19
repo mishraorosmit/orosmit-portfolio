@@ -1,111 +1,78 @@
-import { useState, useEffect } from 'react';
-import StudioCard from '../components/StudioCard';
-import StudioButton from '../components/StudioButton';
-import StudioInput from '../components/StudioInput';
-import api from '@/lib/api';
+import { useState, useEffect } from 'react'
+import api from '../../../lib/api'
+
+
 
 const STATUS_OPTIONS = [
-  { id: 'available', title: 'Available for Work', desc: 'Visible to all visitors', color: '#10b981' },
-  { id: 'busy', title: 'Currently Busy', desc: 'Takes on urgent work only', color: '#ef4444' },
-  { id: 'partial', title: 'Limited Availability', desc: 'Selective projects only', color: '#f59e0b' }
-];
+  { id: 'available', label: 'AVAILABLE', sub: 'Open for new work', color: '#00ff88' },
+  { id: 'busy', label: 'BUSY', sub: 'Not taking new projects', color: '#ff4444' },
+  { id: 'partial', label: 'LIMITED', sub: 'Selective projects only', color: '#ffaa00' },
+]
 
-export default function AvailabilityPanel({ onNavigate }) {
-
-  const [currentStatus, setCurrentStatus] = useState('available');
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [successMsg, setSuccessMsg] = useState('');
+export default function AvailabilityPanel() {
+  const [current, setCurrent] = useState('available')
+  const [message, setMessage] = useState('')
+  const [selected, setSelected] = useState('available')
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
-    api.get('/status/')
-      .then(res => {
-        if (res.data) {
-          setCurrentStatus(res.data.status);
-          setMessage(res.data.message || '');
-        }
-      })
-      .catch(console.error);
-  }, []);
+    api.get('/status/').then(r => { setCurrent(r.data.status); setSelected(r.data.status); setMessage(r.data.message || '') }).catch(() => {})
+  }, [])
 
-  const handleUpdate = async () => {
-    setLoading(true);
+
+
+  const handleSave = async () => {
+    setSaving(true); setError('')
     try {
-      await api.patch('/status/', { status: currentStatus, message });
-      setSuccessMsg('Status updated live.');
-      setTimeout(() => setSuccessMsg(''), 3000);
-    } catch (e) {
-      console.error(e);
-    }
-    setLoading(false);
-  };
+      await api.patch('/status/', { status: selected, message })
+      setCurrent(selected); setSaved(true); setTimeout(() => setSaved(false), 3000)
+    } catch (e) { setError('Failed to update. Check API connection.') }
 
-  const activeOption = STATUS_OPTIONS.find(o => o.id === currentStatus);
+
+    setSaving(false)
+  }
+
+  const cardStyle = { background: '#0d0d18', border: '1px solid rgba(255,69,0,0.08)', borderRadius: '10px', padding: '24px', marginBottom: '20px' }
 
   return (
-    <div className="pb-20 max-w-4xl">
-      <h1 style={{
-        fontFamily: 'Syne, sans-serif',
-        fontSize: '28px',
-        fontWeight: '800',
-        color: '#ffffff',
-        marginBottom: '32px',
-      }}>AVAILABILITY & STATUS</h1>
+    <div style={{ maxWidth: '700px' }}>
+      <h1 style={{ fontFamily: 'Syne, sans-serif', fontSize: '28px', fontWeight: '800', color: '#ffffff', marginBottom: '32px' }}>AVAILABILITY</h1>
 
-
-      {/* Current Status Pill */}
-      <StudioCard>
-        <div className="flex items-center gap-6">
-          <div className="w-5 h-5 rounded-full animate-pulse shadow-[0_0_15px_currentColor]" style={{ backgroundColor: activeOption?.color || 'var(--accent)', color: activeOption?.color || 'var(--accent)' }}></div>
-          <div>
-            <div className="font-mono text-base tracking-widest uppercase text-[var(--text-primary)] mb-2">{activeOption?.title || 'Unknown Status'}</div>
-            <div className="font-mono text-xs text-[var(--text-muted)]">{message || activeOption?.desc}</div>
-          </div>
-        </div>
-      </StudioCard>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        {STATUS_OPTIONS.map(opt => (
-          <div 
-            key={opt.id}
-            onClick={() => setCurrentStatus(opt.id)}
-            className="bg-[var(--bg-card)] border rounded-[10px] p-6 cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
-            style={{ 
-              borderColor: currentStatus === opt.id ? opt.color : 'var(--border-subtle)',
-              boxShadow: currentStatus === opt.id ? `0 0 20px ${opt.color}20` : 'none'
-            }}
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: opt.color }}></div>
-              <div className="font-mono text-[11px] tracking-widest text-[var(--text-primary)]">{opt.title}</div>
-            </div>
-            <p className="font-mono text-[10px] text-[var(--text-muted)] leading-relaxed m-0">{opt.desc}</p>
+      <div style={cardStyle}>
+        <div style={{ fontSize: '10px', color: '#FF4500', letterSpacing: '0.15em', marginBottom: '12px' }}>CURRENT STATUS</div>
+        {STATUS_OPTIONS.filter(s => s.id === current).map(s => (
+          <div key={s.id} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '24px', background: `${s.color}12`, border: `1px solid ${s.color}40` }}>
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.color, boxShadow: `0 0 8px ${s.color}` }} />
+            <span style={{ fontFamily: 'Space Mono, monospace', fontSize: '13px', color: s.color, fontWeight: '700' }}>{s.label}</span>
           </div>
         ))}
       </div>
 
-      <StudioCard title="CUSTOM STATUS MESSAGE">
-        <StudioInput 
-          label="STATUS MESSAGE (shown on hover)"
-          placeholder="Open to freelance, teaching & collabs"
-          value={message}
-          onChange={(e) => setMessage(e.target.value.substring(0, 100))}
-        />
-        <div className="text-right font-mono text-[10px] opacity-40 -mt-2 mb-6">
-          {message.length} / 100
-        </div>
-
-        <div className="flex items-center gap-6">
-          <StudioButton onClick={handleUpdate} disabled={loading}>
-            {loading ? 'UPDATING...' : 'UPDATE STATUS →'}
-          </StudioButton>
-          {successMsg && (
-            <div className="font-mono text-[11px] text-[#10b981] animate-pulse">
-              {successMsg}
+      <div style={cardStyle}>
+        <div style={{ fontSize: '10px', color: '#FF4500', letterSpacing: '0.15em', marginBottom: '16px' }}>SELECT NEW STATUS</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+          {STATUS_OPTIONS.map(s => (
+            <div key={s.id} onClick={() => setSelected(s.id)} style={{ padding: '20px 16px', borderRadius: '8px', border: selected === s.id ? `2px solid ${s.color}` : '2px solid rgba(255,255,255,0.06)', background: selected === s.id ? `${s.color}08` : 'rgba(255,255,255,0.02)', cursor: 'pointer', transition: 'all 0.2s', textAlign: 'center' }} onMouseEnter={e => { if (selected !== s.id) e.currentTarget.style.borderColor = `${s.color}60` }} onMouseLeave={e => { if (selected !== s.id) e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)' }}>
+              <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: s.color, margin: '0 auto 10px', boxShadow: selected === s.id ? `0 0 12px ${s.color}` : 'none' }} />
+              <div style={{ fontFamily: 'Space Mono, monospace', fontSize: '11px', color: selected === s.id ? s.color : '#fff', fontWeight: '700', marginBottom: '4px' }}>{s.label}</div>
+              <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)' }}>{s.sub}</div>
             </div>
-          )}
+          ))}
         </div>
-      </StudioCard>
+      </div>
+
+      <div style={cardStyle}>
+        <div style={{ fontSize: '10px', color: '#FF4500', letterSpacing: '0.15em', marginBottom: '12px' }}>STATUS MESSAGE <span style={{ color: 'rgba(255,255,255,0.2)', marginLeft: '8px' }}>{message.length}/100</span></div>
+        <input value={message} onChange={e => setMessage(e.target.value.slice(0, 100))} placeholder="Open to freelance, teaching & collabs" style={{ width: '100%', background: '#07070f', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '6px', padding: '12px 14px', color: '#ffffff', fontFamily: 'Space Mono, monospace', fontSize: '13px', outline: 'none', boxSizing: 'border-box' }} onFocus={e => e.target.style.borderColor = 'rgba(255,69,0,0.5)'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.08)'} />
+      </div>
+
+      {error && <div style={{ color: '#ff4444', fontSize: '12px', marginBottom: '12px', fontFamily: 'Space Mono, monospace' }}>{error}</div>}
+
+      <button onClick={handleSave} disabled={saving} style={{ padding: '14px 32px', background: saved ? '#00ff88' : '#FF4500', border: 'none', borderRadius: '4px', color: '#000', fontFamily: 'Space Mono, monospace', fontSize: '12px', letterSpacing: '0.1em', cursor: saving ? 'not-allowed' : 'pointer', transition: 'all 0.3s', opacity: saving ? 0.7 : 1 }}>
+        {saving ? 'UPDATING...' : saved ? '✓ STATUS UPDATED LIVE' : 'UPDATE STATUS →'}
+      </button>
     </div>
-  );
+  )
 }

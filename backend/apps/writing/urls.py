@@ -1,7 +1,11 @@
 from django.urls import path
-from .views import WritingListAPIView, WritingDetailAPIView
+from .views import WritingListView, WritingCreateView, WritingUpdateView, WritingDeleteView, WritingDetailView
 
 urlpatterns = [
-    path('', WritingListAPIView.as_view(), name='writing-list'),
-    path('<int:pk>/', WritingDetailAPIView.as_view(), name='writing-detail'),
+    path('', WritingListView.as_view()),
+    path('<int:pk>/', WritingDetailView.as_view()),
+    path('create/', WritingCreateView.as_view()),
+    path('<int:pk>/update/', WritingUpdateView.as_view()),
+    path('<int:pk>/delete/', WritingDeleteView.as_view()),
 ]
+

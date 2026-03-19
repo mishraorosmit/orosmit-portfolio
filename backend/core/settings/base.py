@@ -110,3 +110,12 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:5173',
 ]
+
+from corsheaders.defaults import default_headers
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'x-studio-key',
+    'X-Studio-Key',
+    'x-studio-header',
+]
+
+

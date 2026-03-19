@@ -1,57 +1,38 @@
-from rest_framework import generics, status
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Writing
 from .serializers import WritingSerializer
-from django.conf import settings
 
-class WritingListAPIView(generics.ListAPIView):
-    queryset = Writing.objects.all().order_by('-created_at')
-    serializer_class = WritingSerializer
-    
-    def list(self, request, *args, **kwargs):
+class WritingListView(APIView):
+    def get(self, request):
+        writings = Writing.objects.all().order_by('-id')
+        return Response(WritingSerializer(writings, many=True).data)
+
+class WritingDetailView(APIView):
+    def get(self, request, pk):
         try:
-            return super().list(request, *args, **kwargs)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            w = Writing.objects.get(pk=pk)
+            return Response(WritingSerializer(w).data)
+        except Writing.DoesNotExist: return Response({'error': 'Not found'}, status=404)
 
-    def post(self, request, *args, **kwargs):
-        api_key = request.headers.get('X-Studio-Key')
-        if api_key != getattr(settings, 'STUDIO_API_KEY', 'om-studio-key-2024'):
-            return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class WritingCreateView(APIView):
+    def post(self, request):
+        s = WritingSerializer(data=request.data)
+        if s.is_valid(): s.save(); return Response(s.data, status=201)
+        return Response(s.errors, status=400)
 
-class WritingDetailAPIView(generics.RetrieveAPIView):
-    queryset = Writing.objects.all()
-    serializer_class = WritingSerializer
-    
-    def retrieve(self, request, *args, **kwargs):
+class WritingUpdateView(APIView):
+    def put(self, request, pk):
         try:
-            return super().retrieve(request, *args, **kwargs)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            w = Writing.objects.get(pk=pk)
+            s = WritingSerializer(w, data=request.data, partial=True)
+            if s.is_valid(): s.save(); return Response(s.data)
+            return Response(s.errors, status=400)
+        except Writing.DoesNotExist: return Response({'error': 'Not found'}, status=404)
+    def patch(self, request, pk): return self.put(request, pk)
 
-    def patch(self, request, *args, **kwargs):
-        api_key = request.headers.get('X-Studio-Key')
-        if api_key != getattr(settings, 'STUDIO_API_KEY', 'om-studio-key-2024'):
-            return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-    def put(self, request, *args, **kwargs):
-        return self.patch(request, *args, **kwargs)
+class WritingDeleteView(APIView):
+    def delete(self, request, pk):
+        try: Writing.objects.get(pk=pk).delete(); return Response({'success': True}, status=204)
+        except Writing.DoesNotExist: return Response({'error': 'Not found'}, status=404)
 
-    def delete(self, request, *args, **kwargs):
-        api_key = request.headers.get('X-Studio-Key')
-        if api_key != getattr(settings, 'STUDIO_API_KEY', 'om-studio-key-2024'):
-            return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
-        instance = self.get_object()
-        instance.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
