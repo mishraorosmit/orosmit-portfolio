@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
+import useStore from '@/store/useStore'
 
 const projects = [
   { id:1, title:"Brand Identity — vexx.tm", category:"design", tags:["branding","poster"], year:"2024", bg:"#1a0808" },
@@ -17,17 +19,19 @@ const categories = ['ALL','DESIGN','WEB','BRAND']
 
 export default function PortfolioPage() {
   const [active, setActive] = useState('ALL')
+  const navigate = useNavigate()
+  const setCursorVariant = useStore(state => state.setCursorVariant)
   
   const filtered = active === 'ALL' 
     ? projects 
     : projects.filter(p => p.category === active.toLowerCase())
 
   return (
-    <div style={{ minHeight:'100vh', background:'#050508', paddingTop: '120px', paddingBottom: '96px', paddingLeft: '32px', paddingRight: '32px' }}>
+    <div style={{ minHeight:'100vh', background:'var(--bg-primary)', paddingTop: '120px', paddingBottom: '96px', paddingLeft: '32px', paddingRight: '32px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Header */}
         <div style={{ marginBottom: '64px' }}>
-          <p style={{ fontFamily: 'Space Mono', fontSize: '12px', letterSpacing: '0.3em', color: 'rgba(192,192,192,0.6)', marginBottom: '16px' }}>CATALOGUE</p>
+          <p style={{ fontFamily: 'Space Mono', fontSize: '12px', letterSpacing: '0.3em', color: 'var(--text-secondary)', marginBottom: '16px' }}>CATALOGUE</p>
           <h1 style={{ fontFamily: 'Syne', fontSize: '80px', fontWeight: '800', color: '#fff', margin: 0, lineHeight: 1 }}>ALL WORK</h1>
         </div>
 
@@ -58,29 +62,39 @@ export default function PortfolioPage() {
               <motion.div
                 layout
                 key={p.id}
+                onClick={() => navigate(`/portfolio/${p.id}`)}
                 initial={{ opacity:0, y:20 }}
                 animate={{ opacity:1, y:0 }}
                 exit={{ opacity:0, scale:0.95 }}
                 transition={{ duration:0.35 }}
                 style={{
                   background: p.bg,
-                  border:'1px solid rgba(255,255,255,0.07)',
+                  border:'1px solid var(--border)',
                   borderRadius:'12px',
                   overflow:'hidden',
                   cursor:'none',
                   display: 'flex',
-                  flexDirection: 'column'
+                  flexDirection: 'column',
+                  position: 'relative'
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.borderColor = 'rgba(255,69,0,0.4)'
                   e.currentTarget.style.transform = 'translateY(-4px)'
                   e.currentTarget.style.transition = 'all 0.3s ease'
+                  setCursorVariant('hover')
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+                  e.currentTarget.style.borderColor = 'var(--border)'
                   e.currentTarget.style.transform = 'translateY(0)'
+                  setCursorVariant('default')
                 }}
+                className="group"
               >
+                <div className="absolute inset-0 bg-[var(--bg-primary)]/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20 pointer-events-none">
+                   <span className="font-display font-bold text-xl tracking-widest uppercase text-ember drop-shadow-[0_0_10px_rgba(255,69,0,0.5)]">
+                     VIEW CASE STUDY →
+                   </span>
+                </div>
                 {/* Image placeholder */}
                 <div style={{
                   height:'220px',

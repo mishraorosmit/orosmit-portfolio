@@ -3,17 +3,21 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import useStore from '@/store/useStore';
 import MagneticButton from './MagneticButton';
-
-const NAV_LINKS = [
-  { name: 'WORK', href: '/portfolio', isPage: true },
-  { name: 'ABOUT', href: '#about' },
-  { name: 'TEACHING', href: '/teaching', isPage: true },
-  { name: 'WRITING', href: '/writing', isPage: true },
-  { name: 'VEXX.TM', href: '#brand' },
-  { name: 'CONTACT', href: '#contact' },
-];
+import AvailabilityBadge from './AvailabilityBadge';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function Navbar() {
+  const t = useTranslation();
+  const NAV_LINKS = [
+    { name: t.nav.work, href: '/portfolio', isPage: true },
+    { name: t.nav.about, href: '#about' },
+    { name: t.nav.teaching, href: '/teaching', isPage: true },
+    { name: t.nav.writing, href: '/writing', isPage: true },
+    { name: t.nav.thoughts, href: '/blog', isPage: true },
+    { name: t.nav.brand, href: '#brand' },
+    { name: t.nav.contact, href: '#contact' },
+  ];
+
   const setCursorVariant = useStore((state) => state.setCursorVariant);
   const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState('');
@@ -76,8 +80,12 @@ export default function Navbar() {
     <>
       <motion.nav 
         className={`fixed top-0 left-0 w-full z-50 px-6 md:px-8 py-5 transition-all duration-300 ${
-          scrolled ? 'bg-[rgba(5,5,8,0.85)] backdrop-blur-[20px] border-b border-[rgba(192,192,192,0.08)] py-4' : 'bg-transparent'
+          scrolled ? 'backdrop-blur-[20px] border-b py-4' : 'bg-transparent'
         }`}
+        style={{
+          background: scrolled ? 'var(--nav-bg)' : 'transparent',
+          borderBottomColor: scrolled ? 'var(--border)' : 'transparent'
+        }}
       >
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           {/* Logo */}
@@ -113,6 +121,7 @@ export default function Navbar() {
 
           {/* Hire Me CTA & Hamburger */}
           <div className="flex items-center gap-6">
+            <AvailabilityBadge />
             <div 
               onMouseEnter={() => setCursorVariant('hover')}
               onMouseLeave={() => setCursorVariant('default')}
@@ -123,7 +132,7 @@ export default function Navbar() {
                 className="bg-ember text-void font-bold text-xs uppercase px-4 py-1.5 shadow-[0_0_15px_rgba(255,69,0,0.3)] hover:shadow-[0_0_20px_rgba(255,69,0,0.5)] cursor-none hover:bg-chrome transition-colors"
                 style={{ borderRadius: '9999px' }}
               >
-                HIRE ME
+                {t.nav.hire}
               </MagneticButton>
             </div>
 
@@ -180,7 +189,7 @@ export default function Navbar() {
                 onClick={scrollToContact}
                 className="bg-ember text-void font-bold text-sm tracking-widest uppercase px-8 py-3 mt-4 rounded-full shadow-[0_0_15px_rgba(255,69,0,0.3)] cursor-none"
               >
-                HIRE ME
+                {t.nav.hire}
             </motion.button>
           </motion.div>
         )}

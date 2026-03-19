@@ -45,7 +45,7 @@ export default function TeachingPage() {
               onClick={scrollToContact}
               style={{
                 background: '#080812',
-                border: '1px solid rgba(192,192,192,0.05)',
+                border: '1px solid var(--border)',
                 borderRadius: '16px',
                 padding: '32px',
                 cursor: 'none',
@@ -58,7 +58,7 @@ export default function TeachingPage() {
                 e.currentTarget.style.boxShadow = '0 0 20px rgba(255,69,0,0.15)'
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'rgba(192,192,192,0.05)'
+                e.currentTarget.style.borderColor = 'var(--border)'
                 e.currentTarget.style.boxShadow = 'none'
               }}
             >
@@ -66,9 +66,9 @@ export default function TeachingPage() {
                 {item.icon}
               </div>
               <h3 style={{ fontFamily: 'Syne', fontSize: '24px', fontWeight: '700', color: '#fff', marginBottom: '8px' }}>{item.title}</h3>
-              <p style={{ fontFamily: 'Space Mono', fontSize: '13px', color: 'rgba(192,192,192,0.6)', marginBottom: '32px' }}>{item.tagline}</p>
+              <p style={{ fontFamily: 'Space Mono', fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '32px' }}>{item.tagline}</p>
               
-              <div style={{ marginTop: 'auto', borderTop: '1px solid rgba(192,192,192,0.2)', paddingTop: '16px', color: '#fff', fontFamily: 'Space Mono', fontSize: '12px' }}>
+              <div style={{ marginTop: 'auto', borderTop: '1px solid var(--border)', paddingTop: '16px', color: '#fff', fontFamily: 'Space Mono', fontSize: '12px' }}>
                  Book a Session <span style={{ color: '#FF4500', marginLeft: '8px' }}>→</span>
               </div>
             </motion.div>
@@ -81,7 +81,7 @@ export default function TeachingPage() {
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {FAQS.map((faq, index) => (
-              <div key={index} style={{ borderBottom: '1px solid rgba(192,192,192,0.1)' }}>
+              <div key={index} style={{ borderBottom: '1px solid var(--border)' }}>
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                   style={{
@@ -101,7 +101,7 @@ export default function TeachingPage() {
                       exit={{ height: 0, opacity: 0 }}
                       style={{ overflow: 'hidden' }}
                     >
-                      <p style={{ fontFamily: 'Space Mono', fontSize: '14px', color: 'rgba(192,192,192,0.7)', paddingBottom: '24px', margin: 0, lineHeight: 1.6 }}>
+                      <p style={{ fontFamily: 'Space Mono', fontSize: '14px', color: 'var(--text-secondary)', paddingBottom: '24px', margin: 0, lineHeight: 1.6 }}>
                         {faq.a}
                       </p>
                     </motion.div>

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const writings = [
   { id:1, type:"POEM", title:"Static Between Stars", excerpt:"There is a frequency the universe forgot to name — I live there, between the signal and the silence.", year:"2024" },
@@ -9,17 +10,18 @@ const writings = [
 
 export default function WritingSection() {
   const navigate = useNavigate()
+  const t = useTranslation()
 
   return (
     <section id="writing" style={{ padding:'96px 60px', background:'#07070f' }}>
       
       {/* Header */}
       <div style={{ textAlign:'center', marginBottom:'60px' }}>
-        <p style={{ fontFamily:'Space Mono', fontSize:'11px', color:'rgba(192,192,192,0.4)', letterSpacing:'0.2em', marginBottom:'12px' }}>
-          WORDS I'VE LEFT BEHIND
+        <p style={{ fontFamily:'Space Mono', fontSize:'11px', color:'var(--text-muted)', letterSpacing:'0.2em', marginBottom:'12px' }}>
+          {t.writing.eyebrow}
         </p>
         <h2 style={{ fontFamily:'Syne', fontSize:'72px', fontWeight:'800', color:'#fff', margin:0, lineHeight:1 }}>
-          WRITING
+          {t.writing.heading}
         </h2>
       </div>
 
@@ -33,8 +35,8 @@ export default function WritingSection() {
             viewport={{ once:true }}
             transition={{ duration:0.5, delay: i * 0.12 }}
             style={{
-              background:'linear-gradient(180deg, #0d0d18 0%, #050508 100%)',
-              border:'1px solid rgba(192,192,192,0.07)',
+              background:'linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%)',
+              border:'1px solid var(--border)',
               borderRadius:'12px',
               padding:'28px',
               minHeight:'260px',
@@ -50,7 +52,7 @@ export default function WritingSection() {
               e.currentTarget.style.boxShadow = '-3px 0 0 #FF4500'
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'rgba(192,192,192,0.07)'
+              e.currentTarget.style.borderColor = 'var(--border)'
               e.currentTarget.style.transform = 'translateY(0)'
               e.currentTarget.style.boxShadow = 'none'
             }}
@@ -92,7 +94,7 @@ export default function WritingSection() {
           onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,69,0,0.1)' }}
           onMouseLeave={e => { e.currentTarget.style.background = 'none' }}
         >
-          READ MORE →
+          {t.writing.read_more}
         </button>
       </div>
 

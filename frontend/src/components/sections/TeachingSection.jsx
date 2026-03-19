@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const TEACHING_ITEMS = [
   { id: 1, icon: '⚡', title: 'Physics (Class 11–12)', tagline: 'Concepts over formulas. Intuition over memorization.' },
@@ -10,6 +11,7 @@ const TEACHING_ITEMS = [
 
 function TeachingCard({ item, index }) {
   const cardRef = useRef(null);
+  const t = useTranslation();
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -47,7 +49,7 @@ function TeachingCard({ item, index }) {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onClick={scrollToContact}
-        className="w-full bg-[#080812] border border-[rgba(192,192,192,0.05)] rounded-2xl p-8 min-h-[260px] flex flex-col hover:border-ember/50 hover:shadow-[0_0_20px_rgba(255,69,0,0.15)] transition-all duration-300 relative overflow-hidden group cursor-none"
+        className="w-full bg-card border border-[var(--border)] rounded-2xl p-8 min-h-[260px] flex flex-col hover:border-ember/50 hover:shadow-[0_0_20px_rgba(255,69,0,0.15)] transition-all duration-300 relative overflow-hidden group cursor-none"
       >
         <div className="text-[48px] text-ember mb-auto drop-shadow-[0_0_10px_rgba(255,69,0,0.5)] leading-none select-none">
           {item.icon}
@@ -61,8 +63,8 @@ function TeachingCard({ item, index }) {
             {item.tagline}
           </p>
           <div className="border-t border-starDust/20 pt-4 flex items-center font-mono text-xs text-chrome group/link transition-colors duration-300 group-hover:border-ember/30">
-             Book a Session 
-             <span className="transform ml-2 group-hover/link:translate-x-2 transition-transform text-ember">→</span>
+             {t.teaching.book}
+             <span className="transform ml-2 group-hover/link:translate-x-2 transition-transform text-ember"></span>
           </div>
         </div>
       </div>
@@ -73,6 +75,7 @@ function TeachingCard({ item, index }) {
 export default function TeachingSection() {
   const headerRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const t = useTranslation();
 
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -84,7 +87,7 @@ export default function TeachingSection() {
         
         <div className="mb-20 text-center md:text-left" ref={headerRef}>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-chrome tracking-tight relative inline-block">
-            I TEACH THINGS THAT MATTER
+            {t.teaching.heading}
             <div 
               className="absolute -bottom-4 left-0 h-[2px] bg-ember transition-all duration-1000 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
               style={{ width: isHeaderInView ? '100%' : '0%' }}
@@ -111,11 +114,11 @@ export default function TeachingSection() {
         
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
            <h3 className="text-void font-display font-bold text-2xl md:text-3xl tracking-tight m-0">
-             CURRENTLY TAKING NEW STUDENTS
+             {t.teaching.cta}
            </h3>
            <div className="text-void font-display font-bold text-lg md:text-xl tracking-widest uppercase flex items-center gap-2 group/btn">
-             GET IN TOUCH 
-             <span className="transform group-hover/btn:translate-x-2 transition-transform">→</span>
+             {t.teaching.get_in_touch}
+             <span className="transform group-hover/btn:translate-x-2 transition-transform"></span>
            </div>
         </div>
       </div>

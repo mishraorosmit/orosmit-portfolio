@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const projects = [
   { id:1, title:"Brand Identity — vexx.tm", category:"design", tags:["branding","poster"], year:"2024", bg:"#1a0808" },
@@ -16,24 +17,25 @@ const categories = ['ALL','DESIGN','WEB','BRAND']
 export default function PortfolioSection() {
   const [active, setActive] = useState('ALL')
   const navigate = useNavigate()
+  const t = useTranslation()
   
   const filtered = active === 'ALL' 
     ? projects 
     : projects.filter(p => p.category === active.toLowerCase())
 
   return (
-    <section id="portfolio" style={{ padding:'96px 60px', background:'#050508' }}>
+    <section id="portfolio" style={{ padding:'96px 60px', background:'var(--bg-primary)' }}>
       
       {/* Header */}
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'48px' }}>
         <h2 style={{ fontFamily:'Syne', fontSize:'56px', fontWeight:'800', color:'#fff', margin:0 }}>
-          SELECTED WORK
+          {t.portfolio.heading}
         </h2>
         <button
           onClick={() => navigate('/portfolio')}
           style={{ fontFamily:'Space Mono', fontSize:'12px', color:'#FF4500', background:'none', border:'none', cursor:'none', letterSpacing:'0.1em' }}
         >
-          SEE ALL WORK →
+          {t.portfolio.see_all}
         </button>
       </div>
 

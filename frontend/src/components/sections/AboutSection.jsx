@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const timelineNodes = [
   { year: "2021", label: "Started coding" },
@@ -8,6 +9,7 @@ const timelineNodes = [
 ];
 
 export default function AboutSection() {
+  const t = useTranslation();
   return (
     <section id="about" className="relative w-full py-24 md:py-32 bg-void flex items-center overflow-hidden z-10">
       
@@ -34,11 +36,11 @@ export default function AboutSection() {
           >
             {/* Brutalist pull quote */}
             <h3 className="text-3xl md:text-5xl font-display font-bold text-chrome leading-[1.2] mb-6 mix-blend-difference">
-              "I build things that look impossible and teach things that feel inevitable."
+              "{t.about.quote}"
             </h3>
             
             <p className="font-mono text-starDust text-sm md:text-base leading-relaxed max-w-2xl text-justify group">
-              My name is Orosmit Mishra. Based in India, I am a multidisciplinary creator bridging the gap between logic and aesthetics. By day, I engineer robust web systems and craft immersive visuals. By night, I break down complex physics concepts for the next generation of thinkers.
+              {t.about.body}
             </p>
           </motion.div>
 
@@ -54,11 +56,11 @@ export default function AboutSection() {
           </motion.button>
 
           {/* Minimal Horizontal Timeline */}
-          <div className="mt-8 pt-12 border-t border-[rgba(192,192,192,0.1)] w-full">
+          <div className="mt-8 pt-12 border-t border-[var(--border)] w-full">
             <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-4 relative">
               
               {/* Background line for timeline connected dots (desktop only) */}
-              <div className="hidden md:block absolute top-[7px] left-0 w-full h-[1px] bg-[rgba(192,192,192,0.1)] -z-10" />
+              <div className="hidden md:block absolute top-[7px] left-0 w-full h-[1px] bg-[var(--border)] -z-10" />
 
               {timelineNodes.map((node, i) => (
                 <motion.div

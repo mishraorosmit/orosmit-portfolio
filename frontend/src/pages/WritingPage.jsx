@@ -25,7 +25,7 @@ export default function WritingPage() {
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Hero */}
         <div style={{ marginBottom: '64px' }}>
-          <p style={{ fontFamily: 'Space Mono', fontSize: '12px', letterSpacing: '0.3em', color: 'rgba(192,192,192,0.6)', marginBottom: '16px' }}>ARCHIVE</p>
+          <p style={{ fontFamily: 'Space Mono', fontSize: '12px', letterSpacing: '0.3em', color: 'var(--text-secondary)', marginBottom: '16px' }}>ARCHIVE</p>
           <h1 style={{ fontFamily: 'Syne', fontSize: '80px', fontWeight: '800', color: '#fff', margin: 0, lineHeight: 1 }}>WRITING</h1>
         </div>
 
@@ -62,8 +62,8 @@ export default function WritingPage() {
                 transition={{ duration: 0.3 }}
                 onClick={() => setSelectedPiece(w)}
                 style={{
-                  background: 'linear-gradient(180deg, #0d0d18 0%, #050508 100%)',
-                  border: '1px solid rgba(192,192,192,0.06)',
+                  background: 'linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%)',
+                  border: '1px solid var(--border)',
                   borderRadius: '12px',
                   padding: '28px',
                   minHeight: '280px',
@@ -71,7 +71,7 @@ export default function WritingPage() {
                   cursor: 'none',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  borderLeft: '1px solid rgba(192,192,192,0.06)',
+                  borderLeft: '1px solid var(--border)',
                   transition: 'all 0.35s ease'
                 }}
                 onMouseEnter={e => {
@@ -80,8 +80,8 @@ export default function WritingPage() {
                   e.currentTarget.style.transform = 'translateY(-4px)'
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = 'rgba(192,192,192,0.06)'
-                  e.currentTarget.style.borderLeft = '1px solid rgba(192,192,192,0.06)'
+                  e.currentTarget.style.borderColor = 'var(--border)'
+                  e.currentTarget.style.borderLeft = '1px solid var(--border)'
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
@@ -122,7 +122,7 @@ export default function WritingPage() {
               exit={{ y: 40, opacity: 0 }}
               onClick={e => e.stopPropagation()}
               style={{
-                background: '#0d0d18', width: '100%', maxWidth: '640px', padding: '48px',
+                background: 'var(--bg-secondary)', width: '100%', maxWidth: '640px', padding: '48px',
                 borderRadius: '16px', border: '1px solid rgba(255,69,0,0.2)', position: 'relative'
               }}
             >

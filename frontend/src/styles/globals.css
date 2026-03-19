@@ -4,12 +4,44 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+:root[data-theme="dark"] {
+  --bg-primary: #050508;
+  --bg-secondary: #0d0d18;
+  --bg-card: #0a0a12;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(192,192,192,0.7);
+  --text-muted: rgba(192,192,192,0.3);
+  --accent: #FF4500;
+  --border: rgba(192,192,192,0.08);
+  --border-hover: rgba(255,69,0,0.4);
+  --glow: rgba(255,69,0,0.15);
   --chrome: #C0C0C0;
-  --void: #050508;
-  --ember: #FF4500;
+  --void: var(--bg-primary);
+  --ember: var(--accent);
   --star-dust: #8B8FA8;
-  --glow: rgba(255, 69, 0, 0.5);
+  --nav-bg: rgba(5,5,8,0.85);
+  --canvas-bg: transparent;
+  --card-shadow: none;
+}
+
+:root[data-theme="light"] {
+  --bg-primary: #f5f0eb;
+  --bg-secondary: #ede8e0;
+  --bg-card: #ffffff;
+  --text-primary: #0a0805;
+  --text-secondary: rgba(30,20,10,0.7);
+  --text-muted: rgba(30,20,10,0.4);
+  --accent: #FF4500;
+  --border: rgba(30,20,10,0.1);
+  --border-hover: rgba(255,69,0,0.5);
+  --glow: rgba(255,69,0,0.1);
+  --chrome: var(--text-primary);
+  --void: var(--bg-primary);
+  --ember: var(--accent);
+  --star-dust: #8B8FA8;
+  --nav-bg: rgba(245,240,235,0.85);
+  --canvas-bg: #f0ebe3;
+  --card-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
 }
 
 body {
@@ -59,4 +91,11 @@ body {
 input::placeholder, textarea::placeholder {
   color: rgba(192,192,192,0.3);
   font-family: 'Space Mono', monospace;
+}
+
+:root[data-lang="hi"] body {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+:root[data-lang="hi"] .font-mono {
+  font-family: 'Noto Sans Devanagari', monospace;
 }

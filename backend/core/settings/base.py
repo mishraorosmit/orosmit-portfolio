@@ -12,6 +12,8 @@ if os.path.exists(env_path):
 SECRET_KEY = env('SECRET_KEY', default='dev-secret-key-change-in-production')
 DEBUG = env.bool('DEBUG', default=True)
 
+STUDIO_API_KEY = env('STUDIO_API_KEY', default='om-studio-key-2024')
+
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
 INSTALLED_APPS = [
@@ -31,6 +33,7 @@ INSTALLED_APPS = [
     'apps.portfolio',
     'apps.writing',
     'apps.resume',
+    'apps.blog',
 ]
 
 MIDDLEWARE = [

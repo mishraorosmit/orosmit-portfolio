@@ -4,6 +4,7 @@ from rest_framework import status
 from django.core.mail import send_mail
 from django.conf import settings
 from .serializers import ContactMessageSerializer
+from .models import ContactMessage
 
 class ContactTestAPIView(APIView):
     def get(self, request, *args, **kwargs):
@@ -48,3 +49,16 @@ class ContactAPIView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class ContactMessageListView(APIView):
+    def get(self, request):
+        messages = ContactMessage.objects.all().order_by('-timestamp')[:10]
+        data = [{
+            'id': m.id,
+            'name': m.name,
+            'email': m.email,
+            'message': m.message,
+            'timestamp': m.timestamp.isoformat(),
+            'is_read': getattr(m, 'is_read', False),
+        } for m in messages]
+        return Response(data)

@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import useStore from '@/store/useStore';
 import SkillsOrb from '@/components/three/SkillsOrb';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const SKILLS = [
   { id: 1, name: 'Graphic Design', desc: 'Visual identity, UI/UX, and brand aesthetics.' },
@@ -63,7 +64,7 @@ function SkillCard({ skill, index }) {
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="w-full h-full bg-[#0a0a12] border border-[rgba(192,192,192,0.1)] rounded-2xl p-8 flex flex-col justify-end min-h-[280px] hover:border-ember hover:shadow-[0_0_20px_rgba(255,69,0,0.3)] transition-colors duration-300 relative overflow-hidden group"
+        className="w-full h-full bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-8 flex flex-col justify-end min-h-[280px] hover:border-ember hover:shadow-[0_0_20px_rgba(255,69,0,0.3)] transition-colors duration-300 relative overflow-hidden group"
       >
         {/* Background Number */}
         <span className="absolute top-4 right-6 font-mono font-bold text-[96px] text-chrome opacity-[0.06] select-none pointer-events-none transform translate-x-4 -translate-y-4 group-hover:text-ember transition-colors duration-500">
@@ -84,6 +85,8 @@ function SkillCard({ skill, index }) {
 }
 
 export default function SkillsSection() {
+  const t = useTranslation();
+
   return (
     <section id="skills"  className="relative w-full py-24 md:py-32 bg-void border-t border-starDust/20 overflow-hidden">
       
@@ -102,8 +105,7 @@ export default function SkillsSection() {
           className="mb-24 mt-8"
         >
           <h2 className="text-chrome font-display uppercase leading-[0.9]">
-            <span className="block text-5xl md:text-7xl font-normal tracking-wide text-starDust">WHAT</span>
-            <span className="block text-7xl md:text-9xl font-bold tracking-tighter">I DO</span>
+            <span className="block text-5xl md:text-7xl font-bold tracking-tighter text-starDust">{t.skills.heading}</span>
           </h2>
         </motion.div>
 

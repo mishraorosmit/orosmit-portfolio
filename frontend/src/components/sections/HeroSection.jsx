@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import HeroScene from '@/components/three/HeroScene';
 import MagneticButton from '@/components/ui/MagneticButton';
 import useStore from '@/store/useStore';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const TITLES = [
   "Graphic Designer",
@@ -18,6 +19,8 @@ export default function HeroSection() {
   const containerRef = useRef();
   const [titleIndex, setTitleIndex] = useState(0);
   const setCursorVariant = useStore(state => state.setCursorVariant);
+  const t = useTranslation();
+  const TITLES = t.hero.taglines;
 
   // Tagline cycle
   useEffect(() => {
@@ -47,7 +50,7 @@ export default function HeroSection() {
       
       {/* LEFT SIDE (60%) */}
       <div className="w-full md:w-[60%] flex flex-col z-10 pt-32 md:pt-0">
-        <p className="font-mono text-sm tracking-widest text-starDust mb-6">AVAILABLE FOR FREELANCE · INDIA</p>
+        <p className="font-mono text-sm tracking-widest text-starDust mb-6">{t.hero.available}</p>
         
         <h1 className="text-7xl md:text-[8rem] lg:text-[10rem] font-display font-bold leading-[0.85] tracking-tighter mix-blend-difference mb-6">
           <div className="overflow-hidden flex">
@@ -74,7 +77,7 @@ export default function HeroSection() {
                 position: 'absolute',
                 fontFamily: 'Space Mono',
                 fontSize: '16px',
-                color: 'rgba(192,192,192,0.7)'
+                color: 'var(--text-secondary)'
               }}
             >
               {TITLES[titleIndex]}
@@ -88,7 +91,7 @@ export default function HeroSection() {
               onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-ember text-void font-bold uppercase py-4 px-8 border border-ember border-solid shadow-[0_0_20px_rgba(255,69,0,0.3)] hover:shadow-[0_0_30px_rgba(255,69,0,0.5)]"
             >
-              View My Work
+              {t.hero.cta_work}
             </MagneticButton>
           </div>
           <div onMouseEnter={() => setCursorVariant('hover')} onMouseLeave={() => setCursorVariant('default')}>
@@ -96,7 +99,7 @@ export default function HeroSection() {
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-transparent text-chrome font-bold uppercase py-4 px-8 border border-chrome border-solid hover:bg-white hover:text-void"
             >
-              Hire Me
+              {t.hero.cta_hire}
             </MagneticButton>
           </div>
         </div>

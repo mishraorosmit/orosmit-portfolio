@@ -135,7 +135,7 @@ function StylizedHead() {
 
 export default function HeroScene() {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full transition-colors duration-500" style={{ background: 'var(--canvas-bg)' }}>
       <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
         <ambientLight intensity={0.2} color="#4A5A8A" />
         <rectAreaLight 

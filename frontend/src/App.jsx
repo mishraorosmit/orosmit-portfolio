@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
@@ -7,16 +7,38 @@ import Footer from './components/ui/Footer'
 import CursorFollower from './components/ui/CursorFollower'
 import LoadingScreen from './components/ui/LoadingScreen'
 import ScrollToTop from './components/ui/ScrollToTop'
+import SoundToggle from './components/ui/SoundToggle'
+import ThemeToggle from './components/ui/ThemeToggle'
+import LanguageToggle from './components/ui/LanguageToggle'
+import useStore from './store/useStore'
 
 import Home from './pages/Home'
 import PortfolioPage from './pages/PortfolioPage'
+import CaseStudyPage from './pages/CaseStudyPage'
+import BlogPage from './pages/BlogPage'
+import BlogPostPage from './pages/BlogPostPage'
 import WritingPage from './pages/WritingPage'
 import ContactPage from './pages/ContactPage'
 import TeachingPage from './pages/TeachingPage'
+import StudioLogin from './pages/studio/StudioLogin'
+import StudioDashboard from './pages/studio/StudioDashboard'
 
 function App() {
   const location = useLocation();
   const [isRouting, setIsRouting] = useState(false);
+  const { theme, language, initStudioAuth } = useStore();
+
+  useEffect(() => {
+    initStudioAuth();
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-lang', language);
+  }, [language]);
 
   useEffect(() => {
     setIsRouting(true);
@@ -25,9 +47,12 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-void text-chrome font-display uppercase-style selection:bg-ember selection:text-void">
+    <div className="min-h-screen bg-void text-chrome font-display uppercase-style selection:bg-ember selection:text-void transition-colors duration-500">
       <LoadingScreen />
       <CursorFollower />
+      <SoundToggle />
+      <ThemeToggle />
+      <LanguageToggle />
       <ScrollToTop />
       
       {/* Route Progress Bar */}
@@ -44,7 +69,7 @@ function App() {
         )}
       </AnimatePresence>
 
-      <Navbar />
+      {!location.pathname.startsWith('/om-studio') && <Navbar />}
       
       <main>
         <AnimatePresence mode="wait">
@@ -59,6 +84,13 @@ function App() {
                 <PortfolioPage />
               </motion.div>
             } />
+            <Route path="/portfolio/:id" element={<CaseStudyPage />} />
+            <Route path="/blog" element={
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
+                <BlogPage />
+              </motion.div>
+            } />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/writing" element={
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
                 <WritingPage />
@@ -74,11 +106,14 @@ function App() {
                 <TeachingPage />
               </motion.div>
             } />
+            <Route path="/om-studio" element={<StudioLogin />} />
+            <Route path="/om-studio/dashboard" element={<StudioDashboard />} />
+            <Route path="/om-studio/*" element={<Navigate to="/om-studio" />} />
           </Routes>
         </AnimatePresence>
       </main>
       
-      <Footer />
+      {!location.pathname.startsWith('/om-studio') && <Footer />}
     </div>
   )
 }

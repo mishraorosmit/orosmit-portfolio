@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="py-12 md:py-16 px-8 border-t border-[rgba(192,192,192,0.06)] bg-void relative z-20 overflow-hidden">
+    <footer className="py-12 md:py-16 px-8 border-t border-[var(--border)] bg-void relative z-20 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col gap-12">
         
         {/* ROW 1 */}

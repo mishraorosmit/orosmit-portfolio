@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '@/lib/api';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const InputField = ({ label, id, type = 'text', value, onChange, error, ...props }) => (
   <div style={{ width: '100%', position: 'relative' }}>
@@ -14,7 +15,7 @@ const InputField = ({ label, id, type = 'text', value, onChange, error, ...props
       style={{
         background: 'transparent',
         border: 'none',
-        borderBottom: '1px solid rgba(192,192,192,0.25)',
+        borderBottom: '1px solid var(--border)',
         color: '#ffffff',
         fontFamily: 'Space Mono, monospace',
         fontSize: '14px',
@@ -25,7 +26,7 @@ const InputField = ({ label, id, type = 'text', value, onChange, error, ...props
         marginBottom: '32px',
       }}
       onFocus={e => e.target.style.borderBottomColor = '#FF4500'}
-      onBlur={e => e.target.style.borderBottomColor = 'rgba(192,192,192,0.25)'}
+      onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
       {...props}
     />
     {error && <span style={{ position: 'absolute', bottom: '-20px', left: 0, color: '#FF4500', fontSize: '11px', fontFamily: 'Space Mono' }}>{error}</span>}
@@ -43,7 +44,7 @@ const TextareaField = ({ label, id, value, onChange, error, ...props }) => (
       style={{
         background: 'transparent',
         border: 'none',
-        borderBottom: '1px solid rgba(192,192,192,0.25)',
+        borderBottom: '1px solid var(--border)',
         color: '#ffffff',
         fontFamily: 'Space Mono, monospace',
         fontSize: '14px',
@@ -54,7 +55,7 @@ const TextareaField = ({ label, id, value, onChange, error, ...props }) => (
         marginBottom: '32px',
       }}
       onFocus={e => e.target.style.borderBottomColor = '#FF4500'}
-      onBlur={e => e.target.style.borderBottomColor = 'rgba(192,192,192,0.25)'}
+      onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
       {...props}
     />
     {error && <span style={{ position: 'absolute', bottom: '-20px', left: 0, color: '#FF4500', fontSize: '11px', fontFamily: 'Space Mono' }}>{error}</span>}
@@ -65,6 +66,7 @@ export default function ContactSection() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', website: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
+  const t = useTranslation();
 
   const validate = () => {
     let newErrors = {};
@@ -107,10 +109,10 @@ export default function ContactSection() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-chrome mb-4 leading-[1.0] tracking-tighter mix-blend-difference">
-              LET'S BUILD SOMETHING.
+              {t.contact.heading}
             </h2>
             <p className="text-xl font-mono text-starDust mb-12">
-              Or at least talk about it.
+              {t.contact.subheading}
             </p>
 
             <ul className="flex flex-col gap-6 font-mono text-chrome tracking-wide mb-16">
@@ -163,9 +165,9 @@ export default function ContactSection() {
                 style={{ width:'100%', padding:'0' }}
                 noValidate
               >
-                <InputField label="Name" id="name" value={formData.name} onChange={handleChange} error={errors.name} />
-                <InputField label="Email" id="email" type="email" value={formData.email} onChange={handleChange} error={errors.email} />
-                <TextareaField label="Message" id="message" rows="5" value={formData.message} onChange={handleChange} error={errors.message} />
+                <InputField label={t.contact.name} id="name" value={formData.name} onChange={handleChange} error={errors.name} />
+                <InputField label={t.contact.email} id="email" type="email" value={formData.email} onChange={handleChange} error={errors.email} />
+                <TextareaField label={t.contact.message} id="message" rows="5" value={formData.message} onChange={handleChange} error={errors.message} />
 
                 {/* Honeypot Field */}
                 <input type="text" id="website" style={{ display: 'none' }} value={formData.website} onChange={handleChange} tabIndex="-1" autoComplete="off" />
@@ -177,9 +179,9 @@ export default function ContactSection() {
                 >
                   <span className="relative z-10 flex items-center justify-center gap-4">
                     {status === 'loading' ? (
-                       <>SENDING...<div className="w-5 h-5 border-2 border-void border-t-transparent rounded-full animate-spin" /></>
+                       <>{t.contact.sending}<div className="w-5 h-5 border-2 border-void border-t-transparent rounded-full animate-spin" /></>
                     ) : (
-                      <>SEND MESSAGE <span className="text-2xl leading-none font-normal">→</span></>
+                      <>{t.contact.send} <span className="text-2xl leading-none font-normal"></span></>
                     )}
                   </span>
                 </button>
@@ -200,8 +202,8 @@ export default function ContactSection() {
               >
                 <div className="text-center px-8">
                   <span className="text-ember text-4xl mb-6 block drop-shadow-[0_0_10px_rgba(255,69,0,0.8)]">✦</span>
-                  <h3 className="text-2xl md:text-4xl font-display font-bold text-chrome mb-6">Message received.</h3>
-                  <p className="font-mono text-[rgba(139,143,168,1)] text-lg">I'll get back to you soon.</p>
+                  <h3 className="text-2xl md:text-4xl font-display font-bold text-chrome mb-6">{t.contact.success_heading}</h3>
+                  <p className="font-mono text-[rgba(139,143,168,1)] text-lg">{t.contact.success_body}</p>
                 </div>
               </motion.div>
             )}
