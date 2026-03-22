@@ -10,6 +10,7 @@ import ScrollToTop from './components/ui/ScrollToTop'
 import SoundToggle from './components/ui/SoundToggle'
 import ThemeToggle from './components/ui/ThemeToggle'
 import LanguageToggle from './components/ui/LanguageToggle'
+import ComingSoonNotification from './components/ui/ComingSoonNotification'
 import useStore from './store/useStore'
 
 import Home from './pages/Home'
@@ -54,6 +55,7 @@ function App() {
       <ThemeToggle />
       <LanguageToggle />
       <ScrollToTop />
+      <ComingSoonNotification />
       
       {/* Route Progress Bar */}
       <AnimatePresence>
