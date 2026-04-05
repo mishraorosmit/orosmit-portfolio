@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import useStore from '@/store/useStore';
-import SkillsOrb from '@/components/three/SkillsOrb';
 import { useTranslation } from '@/hooks/useTranslation';
 
 const SKILLS = [
@@ -92,11 +91,6 @@ export default function SkillsSection() {
     <section id="skills"  className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] border-t border-[var(--border-subtle)] overflow-hidden">
 
       
-      {/* 3D Orb Canvas Wrapper */}
-      <div className="absolute top-16 right-8 w-[300px] h-[300px] z-0 pointer-events-none hidden lg:block">
-        <SkillsOrb />
-      </div>
-
       <div className="relative z-10 w-full max-w-7xl mx-auto px-8">
         
         <motion.div

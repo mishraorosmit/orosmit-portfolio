@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import HeroScene from '@/components/three/HeroScene';
 import MagneticButton from '@/components/ui/MagneticButton';
 import useStore from '@/store/useStore';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -112,7 +111,6 @@ export default function HeroSection() {
       {/* RIGHT SIDE (40%) */}
       <div className="absolute top-0 right-0 w-full h-full md:w-[45%] md:h-screen z-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-ember opacity-15 blur-[80px] rounded-full pointer-events-none mix-blend-screen" />
-        <HeroScene />
       </div>
 
       {/* BOTTOM SCROLL INDICATOR */}
